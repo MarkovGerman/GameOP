@@ -2,6 +2,12 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
+Scenes.meta
+manifest.json
+packages-lock.json
+ProjectSettings.asset
+ProjectVersion.txt
+UnityConnectSettings.asset
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
