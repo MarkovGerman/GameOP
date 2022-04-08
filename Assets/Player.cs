@@ -10,7 +10,7 @@ public static class Vector2Extensions
     }
 }
 
-public class PlayerControls : MonoBehaviour
+public class Player : MonoBehaviour
 {
     private Vector2 MovementVector;
     private Rigidbody2D rigidBodyComponent;
@@ -44,11 +44,11 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Square")
-        {
-            Debug.Log("Hit smth");
-        }
-    }
+    // void OnCollisionEnter2D(Collision2D collision)
+    // {
+    //     if (collision.gameObject.tag == "Square")
+    //     {
+    //         Debug.Log("Hit smth");
+    //     }
+    // }
 }
