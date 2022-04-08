@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     private Vector2 MovementVector;
     private Rigidbody2D rigidBodyComponent;
     private Vector2 acceleration = new Vector2(10, 10);
+    public int Health;
 
     void Start()
     {
