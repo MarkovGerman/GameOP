@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider slider;
-    public PlayerInteraction healthPlayer;
+    public PlayerInteraction parametrPlayer;
     
 
     void Start(){
@@ -16,6 +16,6 @@ public class HealthBar : MonoBehaviour
     
     void Update()
     {
-        slider.value = healthPlayer.Health;
+        slider.value = parametrPlayer.Health;
     }
 }

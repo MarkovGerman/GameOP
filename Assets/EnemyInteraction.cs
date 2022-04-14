@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyInteraction : MonoBehaviour
 {
-    [SerializeField] public int health = 100;
-    private int power = 10;
+    public int health;
+    public int power;
 
     private void OnTriggerEnter2D(Collider2D collider)
     {

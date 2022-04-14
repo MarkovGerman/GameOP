@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    [SerializeField] private int health;
-    public int Health => health;
+    public int Health;
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        if (health < 0)
+        Health -= damage;
+        if (Health < 0)
             Die();
     }
 
     public void Die()
     {
-        health = 100;
+        Debug.Log("Die");
     }
 }
