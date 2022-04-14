@@ -5,12 +5,28 @@ using UnityEngine;
 public class GunShooting : MonoBehaviour
 {
     public float offset = -90;
+    public GameObject bullet;
+    public Transform shootPoint;
 
+    private float timeBetweenShoots;
+    public float startTimeBetweenShoots = 0.25f;
 
     void Update()
     {
         Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         float angle = Mathf.Atan2(diff.x, -diff.y) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle + offset);
+        if (timeBetweenShoots <= 0)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                Instantiate(bullet, shootPoint.position, transform.rotation);
+                timeBetweenShoots = startTimeBetweenShoots;
+            }
+        }
+        else
+        {
+            timeBetweenShoots -= Time.deltaTime;
+        }
     }
 }
