@@ -15,6 +15,13 @@ public class BulletBehaviour : MonoBehaviour
     {
         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, Distance, whatIsSolid );
 
+        LifeTime -= Time.deltaTime;
+
+        if (LifeTime <= 0 || Distance <= 0)
+        {
+            Destroy(gameObject);
+        }
+
         if (hitInfo.collider != null)
         {
             if (hitInfo.collider.CompareTag("Enemy"))
@@ -24,5 +31,6 @@ public class BulletBehaviour : MonoBehaviour
             Destroy(gameObject);
         }
         transform.Translate(Vector2.right * Speed * Time.deltaTime);
+        Distance -= Speed * Time.deltaTime;
     }
 }
