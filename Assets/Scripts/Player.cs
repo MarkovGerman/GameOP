@@ -45,11 +45,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    // void OnCollisionEnter2D(Collision2D collision)
-    // {
-    //     if (collision.gameObject.tag == "Square")
-    //     {
-    //         Debug.Log("Hit smth");
-    //     }
-    // }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Portal")
+        {
+            transform.position = new Vector3(-140f, 4f, -1f);
+        }
+    }
 }
