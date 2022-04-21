@@ -116,6 +116,7 @@ public class WalkingEnemy : MonoBehaviour
             new Vector3(point.x, point.y - 1),
         };
         var list = new List<Node>();
+        //Ошибка в этом методе при проверке на присутсвие стены
         foreach(var node in vectors.Select(vector => Node.GetNode(vector, start, goal, previous)))
         {
             if (!boxes.Contains(node.Position.Value) && !closedPoints.Contains(node.Position.Value))
