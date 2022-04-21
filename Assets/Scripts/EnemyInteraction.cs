@@ -8,8 +8,10 @@ public class EnemyInteraction : MonoBehaviour
     private int power = 10;
     public float Speed;
 
+
     private void Update()
     {
+
         if (health <= 0)
         {
             Destroy(gameObject);

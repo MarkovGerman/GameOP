@@ -19,7 +19,7 @@ public class StupidWalking : MonoBehaviour
     void Update()
     {
         MovementVector = new Vector2( 4, 0);
-        rigidBodyComponent.velocity = direction * MovementVector;
+       // rigidBodyComponent.velocity = direction * MovementVector;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
