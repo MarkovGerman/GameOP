@@ -14,8 +14,8 @@ public class EnemyAttack : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(AttackPosition.position, AttackRange);
+        //Gizmos.color = Color.red;
+       // Gizmos.DrawSphere(AttackPosition.position, AttackRange);
     }
 
     // Update is called once per frame
@@ -27,7 +27,7 @@ public class EnemyAttack : MonoBehaviour
 
             for (int i = 0; i < hero.Length; i++)
             {
-                hero[i].GetComponent<Player>().TakeDamage(Damage);
+               // hero[i].GetComponent<Player>().TakeDamage(Damage);
             }
             attackDebuff = AttackStart;
         }

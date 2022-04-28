@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        CheckHealth();
+        //CheckHealth();
 
         var w = Input.GetKey(KeyCode.W) ? 1 : 0;
         var s = Input.GetKey(KeyCode.S) ? -1 : 0;
@@ -48,41 +48,7 @@ public class Player : MonoBehaviour
         rigidBodyComponent.angularDrag = 10;
     }
 
-    void CheckHealth()
-    {
-        if (Health > NumOfHearts)
-        {
-            Health = NumOfHearts;
-        }
-
-        Health += Time.deltaTime * Heal;
-
-        for (int i = 0; i < Hearts.Length; i++)
-        {
-            if (i < Mathf.RoundToInt(Health))
-            {
-                Hearts[i].sprite = FullHeart;
-            }
-            else
-            {
-                Hearts[i].sprite = EmptyHeart;
-            }
-
-            if (i < NumOfHearts)
-            {
-                Hearts[i].enabled = true;
-            }
-            else
-            {
-                Hearts[i].enabled = false;
-            }
-
-            if (Health < 1)
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
-        }
-    }
+    
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -92,8 +58,8 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
-    {
-        Health -= damage;
-    }
+    //public void TakeDamage(int damage)
+    //{
+     //   Health -= damage;
+   // }
 }
