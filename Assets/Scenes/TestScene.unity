@@ -142,6 +142,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hero: {fileID: 275931624}
   delta: 10
+  map: {fileID: 1531574378}
+  barriers:
+  - {fileID: 11400000, guid: 77bb9d782a35b7e4aa65009617a95f15, type: 2}
 --- !u!1 &179980994
 GameObject:
   m_ObjectHideFlags: 0
@@ -3196,6 +3199,14 @@ PrefabInstance:
     - target: {fileID: 2206344604049747175, guid: bdcd9dcfb4dbc824c85dad6c68031f69, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206344604437785106, guid: bdcd9dcfb4dbc824c85dad6c68031f69, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206344604437785107, guid: bdcd9dcfb4dbc824c85dad6c68031f69, type: 3}
+      propertyPath: m_Radius
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 3266530045331243975, guid: bdcd9dcfb4dbc824c85dad6c68031f69, type: 3}
       propertyPath: m_RootOrder

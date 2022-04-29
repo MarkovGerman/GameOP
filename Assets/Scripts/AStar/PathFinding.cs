@@ -1,19 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using System.Linq;
 
 public class PathFinding 
 {
     private const int moveStraightCost = 10;
     private const int moveDiagonalCost = 14;
 
+
+    private Tile[] barriers;
+    private Tilemap map;
     private MyGrid<PathNode> grid;
     private List<PathNode> toOpen;
     private HashSet<PathNode> opened;
 
-    public PathFinding(int width, int height)
+    public PathFinding(int width, int height, Tilemap map, Tile[] barriers)
     {
         grid = new MyGrid<PathNode>(width, height, 1f, new Vector3(-8, -8), (MyGrid<PathNode> g, int x, int y) => new PathNode(g, x, y));
+        this.barriers = barriers;
+        this.map = map;
     }
 
     public MyGrid<PathNode> GetGrid()
@@ -65,7 +72,8 @@ public class PathFinding
             foreach (var neighbourNode in GetSurroundingsList(currentNode))
             {
                 if (opened.Contains(neighbourNode)) continue;
-                if (!neighbourNode.IsWalkable)
+
+                if (!neighbourNode.IsWalkable || barriers.Contains(map.GetTile(new Vector3Int(neighbourNode.x - 8, neighbourNode.y - 8, 0))))
                 {
                     opened.Add(neighbourNode);
                     continue;
@@ -98,15 +106,15 @@ public class PathFinding
         if (currentNode.x - 1 >= 0)
         {
             surroundings.Add(GetNode(currentNode.x - 1, currentNode.y));
-            if (currentNode.y - 1 >= 0) surroundings.Add(GetNode(currentNode.x - 1, currentNode.y - 1));
-            if (currentNode.y + 1 < grid.GetHeight()) surroundings.Add(GetNode(currentNode.x - 1, currentNode.y + 1));
+            //if (currentNode.y - 1 >= 0) surroundings.Add(GetNode(currentNode.x - 1, currentNode.y - 1));
+            //if (currentNode.y + 1 < grid.GetHeight()) surroundings.Add(GetNode(currentNode.x - 1, currentNode.y + 1));
         }
 
         if (currentNode.x + 1 < grid.GetWidth())
         {
             surroundings.Add(GetNode(currentNode.x + 1, currentNode.y));
-            if (currentNode.y - 1 >= 0) surroundings.Add(GetNode(currentNode.x + 1, currentNode.y - 1));
-            if (currentNode.y + 1 < grid.GetHeight()) surroundings.Add(GetNode(currentNode.x + 1, currentNode.y + 1));
+            //if (currentNode.y - 1 >= 0) surroundings.Add(GetNode(currentNode.x + 1, currentNode.y - 1));
+            //if (currentNode.y + 1 < grid.GetHeight()) surroundings.Add(GetNode(currentNode.x + 1, currentNode.y + 1));
         }
         if (currentNode.y - 1 >= 0) surroundings.Add(GetNode(currentNode.x, currentNode.y - 1));
         if (currentNode.y + 1 < grid.GetHeight()) surroundings.Add(GetNode(currentNode.x, currentNode.y + 1));
