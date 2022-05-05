@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CameraBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public GameObject player;
+    private GameObject player;
     private Vector3 offset;
+
     void Start()
     {
         offset = transform.position;
@@ -15,6 +15,8 @@ public class CameraBehaviour : MonoBehaviour
     //Update is called once per frame
     void Update()
     {
+        if (player == null)
+            player = GameObject.Find("Player(Clone)");
         transform.position = player.transform.position + offset/32;
     }
 }
