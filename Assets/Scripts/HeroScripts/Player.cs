@@ -17,13 +17,7 @@ public class Player : MonoBehaviour
     private Vector2 MovementVector;
     private Rigidbody2D rigidBodyComponent;
     public float Speed;
-    public float Health;
-
-    public int NumOfHearts;
-    public Image[] Hearts;
-    public Sprite FullHeart;
-    public Sprite EmptyHeart;
-    public float Heal;
+    
 
     void Start()
     {

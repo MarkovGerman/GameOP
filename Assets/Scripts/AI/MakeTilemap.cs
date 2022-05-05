@@ -13,8 +13,6 @@ public class MakeTilemap : MonoBehaviour
 
     private Grid grid;
     private Tilemap tilesMap;
-    private TilemapRenderer tilesRenderer;
-    private TilemapCollider2D tilesCollider;
     private List<int[]> map;
     
     private void Awake()
@@ -51,10 +49,18 @@ public class MakeTilemap : MonoBehaviour
             }
     }
 
-
-    void Update()
+    private void SetTilesMap()
     {
-        
+        Tiles[0].colliderType  = Tile.ColliderType.None;
+        Tiles[1].colliderType = Tile.ColliderType.Sprite;
+
+        tilesMap = new GameObject("Tilesmap").AddComponent<Tilemap>();
+        tilesMap.transform.SetParent(grid.transform);
+        tilesMap.size = new Vector3Int(10, 10, 0);
+
+        tilesMap.gameObject.AddComponent<TilemapRenderer>();
+        tilesMap.gameObject.AddComponent<TilemapCollider2D>();
+
     }
 
     private List<int[]> ParseMapFile(string mapNum, string filePath = @"D:\GameOP\Assets\Maps\map")
@@ -72,20 +78,6 @@ public class MakeTilemap : MonoBehaviour
         streamReader.Close();
 
         return mapInt;
-    }
-
-    private void SetTilesMap()
-    {
-        Tiles[0].colliderType  = Tile.ColliderType.None;
-        Tiles[1].colliderType = Tile.ColliderType.Sprite;
-
-        tilesMap = new GameObject("Tilesmap").AddComponent<Tilemap>();
-        tilesRenderer = tilesMap.gameObject.AddComponent<TilemapRenderer>();
-        tilesCollider = tilesMap.gameObject.AddComponent<TilemapCollider2D>();
-
-        tilesMap.size = new Vector3Int(10, 10, 0);
-
-        tilesMap.transform.SetParent(grid.transform);
     }
 
     private void ParseLine(string line, List<int[]> mapInt)
@@ -110,6 +102,9 @@ public class MakeTilemap : MonoBehaviour
                     break;
                 case ' ':
                     line2Int[i] = 4;
+                    break;
+                case 'b':
+                    line2Int[i] = 5;
                     break;
             }
         }

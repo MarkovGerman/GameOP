@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class EnemyInteraction : MonoBehaviour
 {
-    [SerializeField] public int health = 100;
+    [SerializeField] public int health = 3;
     private int power = 10;
     public float Speed;
 
-    private ScoreManagement sm;
+    //private ScoreManagement sm;
 
     private void Start()
     {
-        sm = FindObjectOfType<ScoreManagement>();
+        //sm = FindObjectOfType<ScoreManagement>();
     }
 
     private void Update()
@@ -20,7 +20,7 @@ public class EnemyInteraction : MonoBehaviour
 
         if (health <= 0)
         {
-            sm.Add();
+            //sm.Add();
             Destroy(gameObject);
         }
 
@@ -36,5 +36,6 @@ public class EnemyInteraction : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        Debug.Log("Take hit");
     }
 }

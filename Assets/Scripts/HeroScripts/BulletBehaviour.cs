@@ -7,7 +7,7 @@ public class BulletBehaviour : MonoBehaviour
     public float Speed;
     public float LifeTime;
     public float Distance;
-    public int Damage;
+    public int Damage = 1;
     public LayerMask whatIsSolid;
 
     // Update is called once per frame
@@ -27,6 +27,7 @@ public class BulletBehaviour : MonoBehaviour
             if (hitInfo.collider.CompareTag("Enemy"))
             {
                 hitInfo.collider.GetComponent<EnemyInteraction>().TakeDamage(Damage);
+                Debug.Log("Hit");
             }
             Destroy(gameObject);
         }

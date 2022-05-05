@@ -6,16 +6,20 @@ using UnityEngine.Tilemaps;
 public class MonsterAI : MonoBehaviour
 {
     private float PathUpdateTime = 30;
+    private float pathTimer;
 
     private GameObject player;
+
     private Tilemap tilesMap;
-    private float pathTimer;
     private List<Vector3Int> path;
+
+    private int stepCounter;
 
     void Start()
     {
         pathTimer = 0f;
         PathUpdateTime *= Time.deltaTime;
+        stepCounter = 1;
     }
 
     void Update()
@@ -25,17 +29,24 @@ public class MonsterAI : MonoBehaviour
         if (tilesMap == null)
             tilesMap = GameObject.Find("Tilesmap").GetComponent<Tilemap>();
 
-
-        path = FindPath((Vector3Int?)tilesMap.WorldToCell(gameObject.transform.position), (Vector3Int?)tilesMap.WorldToCell(player.transform.position));
-
-        foreach (var step in path)
+        if (path == null || stepCounter == path.Count - 1 || pathTimer >= PathUpdateTime / 2)
         {
-            while (pathTimer < PathUpdateTime)
-                pathTimer += Time.deltaTime;
+            path = FindPath((Vector3Int?)tilesMap.WorldToCell(gameObject.transform.position), (Vector3Int?)tilesMap.WorldToCell(player.transform.position));
+            stepCounter = 1;
+        }
+          
+        if (pathTimer >= PathUpdateTime && path != null && stepCounter < path.Count - 1)
+        {
+            var firstStep = path[stepCounter - 1];
+            var secondStep = path[stepCounter];
             Debug.Log("Moved");
-            transform.Translate((tilesMap.CellToWorld(step) - transform.position) * 0.001f);
+
+            transform.Translate(secondStep - firstStep);
+
             pathTimer = 0f;
-        } 
+            stepCounter++;
+        }
+        pathTimer += Time.deltaTime;
     }
 
     private List<Vector3Int> FindPath(Vector3Int? start, Vector3Int? end)
@@ -47,17 +58,19 @@ public class MonsterAI : MonoBehaviour
         queue.Enqueue(start);
 
         while (queue.Count != 0)
-        {
+        {  
             var tile = queue.Dequeue();
-            foreach (var nextTile in SurroundTiles(tile))
+            var incidentTiles = SurroundTiles(tile);
+            var randomizer = Random.Range(0, incidentTiles.Count - 1);
+            foreach (var nextTile in incidentTiles)
             {
+                if (nextTile == incidentTiles[randomizer]) continue;
                 if (track.ContainsKey(nextTile)) continue;
 
                 var tile2Local = tilesMap.WorldToCell((Vector3Int)tile);
 
                 if (tilesMap.GetTile(tile2Local).name == "originWall")
                     continue;
-
 
                 track[nextTile] = tile;
                 queue.Enqueue(nextTile);
@@ -76,13 +89,15 @@ public class MonsterAI : MonoBehaviour
         return result;
     }
 
-    private IEnumerable<Vector3Int?> SurroundTiles(Vector3Int? centralTile)
+    private List<Vector3Int?> SurroundTiles(Vector3Int? centralTile)
     {
+        var list = new List<Vector3Int?>();
         for (var x = -1; x <= 1; x++)
             for (var y = -1; y <= 1; y++)
             {
                 var vec = centralTile + new Vector3Int(x, y, 0);
-                yield return vec;
+                list.Add(vec);
             }
+        return list;
     }
 }
