@@ -19,7 +19,7 @@ public class MakeTilemap : MonoBehaviour
     
     private void Awake()
     {
-        map = ParseMapFile("1");
+        map = ParseMapFile("1", @"C:\Users\German\GameOP\Assets\Maps\map");
 
         gameObject.transform.position = new Vector3(0, 0, -75);
         grid = new GameObject("Grid").AddComponent<Grid>(); 
