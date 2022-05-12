@@ -8,8 +8,13 @@ TagManager:
   - Portal
   - Wall
   - Box
+<<<<<<< HEAD
   - Door
   - Key
+=======
+  - Potion
+  - DesBox
+>>>>>>> Smarter-AI
   layers:
   - Default
   - TransparentFX
