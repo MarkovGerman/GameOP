@@ -8,6 +8,8 @@ TagManager:
   - Portal
   - Wall
   - Box
+  - Door
+  - Key
   layers:
   - Default
   - TransparentFX

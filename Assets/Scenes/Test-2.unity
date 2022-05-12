@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: ad77132392faa3e4380a43eefad3670f, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -202,7 +202,7 @@ GameObject:
   m_Layer: 0
   m_Name: map
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -225,9 +225,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 13bd1be23224a2c4cadf2702c49430c6, type: 2}
   - {fileID: 0}
   - {fileID: 11400000, guid: 13bd1be23224a2c4cadf2702c49430c6, type: 2}
+  - {fileID: 11400000, guid: 13bd1be23224a2c4cadf2702c49430c6, type: 2}
+  - {fileID: 11400000, guid: 13bd1be23224a2c4cadf2702c49430c6, type: 2}
   TileSize: 0
   Player: {fileID: 6273661854223771619, guid: cce47afc27d31d248b55bb479b03d5e0, type: 3}
   Monster: {fileID: 7597484979260729493, guid: bdcd9dcfb4dbc824c85dad6c68031f69, type: 3}
+  BossMonster: {fileID: 8601396712669451896, guid: 49ae5eb904bfac54686bedecb62d63b4, type: 3}
+  Door: {fileID: 6041720513752078872, guid: f48d1708c7c514a44973177cad54ed30, type: 3}
+  Key: {fileID: 8433884471141953763, guid: ffc59f6afbd30a042b94c55b1bd562cc, type: 3}
 --- !u!4 &1567038630
 Transform:
   m_ObjectHideFlags: 0
@@ -236,7 +241,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1567038628}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2069428, y: -1.3484333, z: -75.142235}
+  m_LocalPosition: {x: -5.5, y: -2.2, z: -200}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

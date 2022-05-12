@@ -27,7 +27,7 @@ public class EnemyAttack : MonoBehaviour
 
             for (int i = 0; i < hero.Length; i++)
             {
-               // hero[i].GetComponent<Player>().TakeDamage(Damage);
+               //hero[i].GetComponent<Player>().TakeDamage(Damage);
             }
             attackDebuff = AttackStart;
         }

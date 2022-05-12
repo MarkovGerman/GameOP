@@ -24,14 +24,20 @@ public class BulletBehaviour : MonoBehaviour
 
         if (hitInfo.collider != null)
         {
+            Debug.Log(hitInfo.collider);
             if (hitInfo.collider.CompareTag("Enemy"))
             {
                 hitInfo.collider.GetComponent<EnemyInteraction>().TakeDamage(Damage);
-                Debug.Log("Hit");
+                //Debug.Log("Hit");
             }
             Destroy(gameObject);
         }
         transform.Translate(Vector2.right * Speed * Time.deltaTime);
         Distance -= Speed * Time.deltaTime;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.gameObject.tag);
     }
 }

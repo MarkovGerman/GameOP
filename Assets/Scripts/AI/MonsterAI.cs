@@ -5,18 +5,27 @@ using UnityEngine.Tilemaps;
 
 public class MonsterAI : MonoBehaviour
 {
-    private float PathUpdateTime = 30;
+    private float PathUpdateTime = 40;
     private float pathTimer;
 
     private GameObject player;
 
     private Tilemap tilesMap;
     private List<Vector3Int> path;
+    private HashSet<string> unsypportedTiles;
+    private HashSet<Vector3> doorCoordinates;
 
     private int stepCounter;
 
     void Start()
     {
+        doorCoordinates = GameObject.Find("map").GetComponent<MakeTilemap>().doorCoords;
+        
+        unsypportedTiles = new HashSet<string>();
+
+        unsypportedTiles.Add("originWall");
+        unsypportedTiles.Add("box");
+
         pathTimer = 0f;
         PathUpdateTime *= Time.deltaTime;
         stepCounter = 1;
@@ -27,7 +36,7 @@ public class MonsterAI : MonoBehaviour
         if (player == null)
             player = GameObject.Find("Player(Clone)");
         if (tilesMap == null)
-            tilesMap = GameObject.Find("Tilesmap").GetComponent<Tilemap>();
+            tilesMap = GameObject.Find("baseLayer").GetComponent<Tilemap>();
 
         if (path == null || stepCounter == path.Count - 1 || pathTimer >= PathUpdateTime / 2)
         {
@@ -39,7 +48,7 @@ public class MonsterAI : MonoBehaviour
         {
             var firstStep = path[stepCounter - 1];
             var secondStep = path[stepCounter];
-            Debug.Log("Moved");
+            //Debug.Log("Moved");
 
             transform.Translate(secondStep - firstStep);
 
@@ -69,7 +78,9 @@ public class MonsterAI : MonoBehaviour
 
                 var tile2Local = tilesMap.WorldToCell((Vector3Int)tile);
 
-                if (tilesMap.GetTile(tile2Local).name == "originWall")
+                if (unsypportedTiles.Contains(tilesMap.GetTile(tile2Local).name))
+                    continue;
+                if (doorCoordinates.Contains(tile2Local + new Vector3(0.5f, 0.5f, 0)))
                     continue;
 
                 track[nextTile] = tile;
@@ -82,6 +93,8 @@ public class MonsterAI : MonoBehaviour
         while (pathItem != null)
         {
             result.Add((Vector3Int)pathItem);
+
+            if (!track.ContainsKey(pathItem)) return null;
             pathItem = track[pathItem];
         }
         result.Reverse();
