@@ -8,6 +8,8 @@ TagManager:
   - Portal
   - Wall
   - Box
+  - Potion
+  - DesBox
   layers:
   - Default
   - TransparentFX
