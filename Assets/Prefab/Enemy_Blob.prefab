@@ -97,6 +97,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   Speed: 0
+  Key: {fileID: 0}
+  Heal: {fileID: 0}
 --- !u!1 &2206344604049747174
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,6 +144,7 @@ GameObject:
   - component: {fileID: 2206344604437785119}
   - component: {fileID: 7468153705586356212}
   - component: {fileID: 5933662665668842784}
+  - component: {fileID: 7633695788596959275}
   m_Layer: 6
   m_Name: Enemy_Blob
   m_TagString: Enemy
@@ -251,6 +254,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   Speed: 0
+  Key: {fileID: 8433884471141953763, guid: ffc59f6afbd30a042b94c55b1bd562cc, type: 3}
+  Heal: {fileID: 8590197905022560171, guid: 74420290caa455944a6c920b20bf4f9b, type: 3}
 --- !u!114 &2206344604437785119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,9 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackStart: 0.5
   AttackPosition: {fileID: 2206344604049747175}
-  Hero:
-    serializedVersion: 2
-    m_Bits: 128
+  Mob: []
   AttackRange: 1
   Damage: 1
 --- !u!114 &7468153705586356212
@@ -308,3 +311,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9316265, y: 0.9054682}
   m_EdgeRadius: 0
+--- !u!114 &7633695788596959275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7597484979260729493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66e0337e2cff877418863a21b6744edb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelfHealth: 5

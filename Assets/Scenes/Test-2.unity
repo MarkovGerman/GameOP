@@ -227,12 +227,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 13bd1be23224a2c4cadf2702c49430c6, type: 2}
   - {fileID: 11400000, guid: 13bd1be23224a2c4cadf2702c49430c6, type: 2}
   - {fileID: 11400000, guid: 13bd1be23224a2c4cadf2702c49430c6, type: 2}
+  - {fileID: 11400000, guid: 13bd1be23224a2c4cadf2702c49430c6, type: 2}
+  - {fileID: 11400000, guid: 13bd1be23224a2c4cadf2702c49430c6, type: 2}
+  - {fileID: 11400000, guid: 13bd1be23224a2c4cadf2702c49430c6, type: 2}
+  - {fileID: 11400000, guid: 13bd1be23224a2c4cadf2702c49430c6, type: 2}
+  - {fileID: 11400000, guid: 13bd1be23224a2c4cadf2702c49430c6, type: 2}
   TileSize: 0
   Player: {fileID: 6273661854223771619, guid: cce47afc27d31d248b55bb479b03d5e0, type: 3}
   Monster: {fileID: 7597484979260729493, guid: bdcd9dcfb4dbc824c85dad6c68031f69, type: 3}
   BossMonster: {fileID: 8601396712669451896, guid: 49ae5eb904bfac54686bedecb62d63b4, type: 3}
   Door: {fileID: 6041720513752078872, guid: f48d1708c7c514a44973177cad54ed30, type: 3}
   Key: {fileID: 8433884471141953763, guid: ffc59f6afbd30a042b94c55b1bd562cc, type: 3}
+  Tank: {fileID: 4801835349674218721, guid: c77659a9dea906442b29d0437d3cd149, type: 3}
+  Potion: {fileID: 8590197905022560171, guid: 74420290caa455944a6c920b20bf4f9b, type: 3}
+  Fire: {fileID: 1267284590268920770, guid: 13854c357afbb9249b90b7a5008337c8, type: 3}
+  ElArrow: {fileID: 636227596228974618, guid: 749e8ef4caabaa1428a3c2dcffc3f266, type: 3}
+  Sharpes: {fileID: 6747923650242724979, guid: 171e915eb943214479d125a2c43f327b, type: 3}
 --- !u!4 &1567038630
 Transform:
   m_ObjectHideFlags: 0

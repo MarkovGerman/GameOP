@@ -30,6 +30,12 @@ public class BulletBehaviour : MonoBehaviour
                 hitInfo.collider.GetComponent<EnemyInteraction>().TakeDamage(Damage);
                 //Debug.Log("Hit");
             }
+
+            Debug.Log("Hit smth");
+            if (hitInfo.collider.CompareTag("Tank"))
+            {
+                hitInfo.collider.GetComponent<Fire>().fired = true;
+            }
             Destroy(gameObject);
         }
         transform.Translate(Vector2.right * Speed * Time.deltaTime);
@@ -38,6 +44,6 @@ public class BulletBehaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject.tag);
+        
     }
 }

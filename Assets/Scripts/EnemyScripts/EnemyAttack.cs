@@ -8,14 +8,13 @@ public class EnemyAttack : MonoBehaviour
     public float AttackStart;
 
     public Transform AttackPosition;
-    public LayerMask Hero;
+    public LayerMask[] Mob;
     public float AttackRange;
     public int Damage;
 
-    private void OnDrawGizmosSelected()
+    private void Start()
     {
-        //Gizmos.color = Color.red;
-       // Gizmos.DrawSphere(AttackPosition.position, AttackRange);
+        Mob = new LayerMask[] { LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Solid") };
     }
 
     // Update is called once per frame
@@ -23,7 +22,7 @@ public class EnemyAttack : MonoBehaviour
     {
         if (attackDebuff <= 0)
         {
-            Collider2D[] hero = Physics2D.OverlapCircleAll(AttackPosition.position, AttackRange, Hero);
+            Collider2D[] hero = Physics2D.OverlapCircleAll(AttackPosition.position, AttackRange);
 
             for (int i = 0; i < hero.Length; i++)
             {

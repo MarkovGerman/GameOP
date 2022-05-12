@@ -4,17 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
-  - Portal
-  - Wall
-  - Box
-<<<<<<< HEAD
   - Door
+  - Enemy
   - Key
-=======
-  - Potion
-  - DesBox
->>>>>>> Smarter-AI
+  - Tank
   layers:
   - Default
   - TransparentFX
@@ -23,8 +16,8 @@ TagManager:
   - Water
   - UI
   - Solid
-  - Hero
-  - 
+  - Mob
+  - Player
   - 
   - 
   - 

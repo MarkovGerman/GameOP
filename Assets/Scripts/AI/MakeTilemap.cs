@@ -14,6 +14,12 @@ public class MakeTilemap : MonoBehaviour
     public GameObject BossMonster;
     public GameObject Door;
     public GameObject Key;
+    public GameObject Tank;
+
+    public GameObject Potion;
+    public GameObject Fire;
+    public GameObject ElArrow;
+    public GameObject Sharpes;
 
     private Dictionary<char, int> tilesDictionary;
     private Grid grid;
@@ -46,7 +52,7 @@ public class MakeTilemap : MonoBehaviour
 
         while (line != null)
         {
-            tilesDictionary[line[0]] = int.Parse(line[1].ToString());
+            tilesDictionary[line[0]] = int.Parse(line.Substring(1, 2).ToString());
             line = streamReader.ReadLine();
         }
 
@@ -92,6 +98,8 @@ public class MakeTilemap : MonoBehaviour
 
         baseLayer.gameObject.AddComponent<TilemapRenderer>();
         baseLayer.gameObject.AddComponent<TilemapCollider2D>();
+
+        baseLayer.gameObject.layer = 0;
     }
 
     private void DrawMap()
@@ -126,6 +134,31 @@ public class MakeTilemap : MonoBehaviour
                 if (map[i][j] == 7)
                 {
                     Instantiate(Key, pos, transform.rotation);
+                }
+
+                if (map[i][j] == 8)
+                {
+                    Instantiate(Tank, pos, transform.rotation);
+                }
+
+                if (map[i][j] == 9)
+                {
+                    Instantiate(Sharpes, pos, transform.rotation);
+                }
+
+                if (map[i][j] == 10)
+                {
+                    Instantiate(Fire, pos, transform.rotation);
+                }
+
+                if (map[i][j] == 11)
+                {
+                    Instantiate(Potion, pos, transform.rotation);
+                }
+
+                if (map[i][j] == 12)
+                {
+                    Instantiate(ElArrow, pos, transform.rotation);
                 }
 
                 baseLayer.SetTile(pos, tile);

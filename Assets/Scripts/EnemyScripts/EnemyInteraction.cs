@@ -7,6 +7,8 @@ public class EnemyInteraction : MonoBehaviour
     [SerializeField] public int health = 3;
     private int power = 10;
     public float Speed;
+    public GameObject Key;
+    public GameObject Heal;
 
     //private ScoreManagement sm;
 
@@ -21,6 +23,10 @@ public class EnemyInteraction : MonoBehaviour
         if (health <= 0)
         {
             //sm.Add();
+            if (GameObject.FindGameObjectsWithTag("Enemy").Length == 2)
+                Instantiate(Key, transform.position, transform.rotation);
+            else
+                Instantiate(Heal, transform.position, transform.rotation);
             Destroy(gameObject);
         }
 
