@@ -16,7 +16,7 @@ public class OnCollisionInteraction : MonoBehaviour
 
         if (collision.gameObject.tag == "Key")
         {
-            gameObject.GetComponent<Inventory>().KeysNum += 2;
+            gameObject.GetComponent<Inventory>().KeysNum += 6;
             Destroy(collision.gameObject);
         }
     }

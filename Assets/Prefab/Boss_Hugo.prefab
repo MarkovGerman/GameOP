@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10969b6335e3a7b4792066d4de27920a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 10
   Speed: 0
   Key: {fileID: 8433884471141953763, guid: ffc59f6afbd30a042b94c55b1bd562cc, type: 3}
   Heal: {fileID: 8590197905022560171, guid: 74420290caa455944a6c920b20bf4f9b, type: 3}
@@ -100,6 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8117649828be13d4caae63ddb5bcb17a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Speed: 0.1
+  Bullet: {fileID: 7987254798474048836, guid: 6cc02b3b7721ab84cb2302022bd051b0, type: 3}
+  TimeBtwShoots: 30
 --- !u!1 &8970514762793052737
 GameObject:
   m_ObjectHideFlags: 0

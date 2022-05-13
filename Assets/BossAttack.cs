@@ -7,24 +7,34 @@ public class BossAttack : MonoBehaviour
     public float Speed = 0.1f;
     public GameObject Bullet;
 
-    private bool wentRight = false;
-    private int ToGo = 1;
+    public float TimeBtwShoots = 10f;
+
+    private float curtime;
 
     private void Start()
     {
-        
+        curtime = 0f;
+        TimeBtwShoots *= Time.deltaTime;
     }
 
     void Update()
     {
-        var firstPos = transform.position;
+        curtime += Time.deltaTime;
+        if (curtime >= TimeBtwShoots)
+        {
+            Instantiate(Bullet, transform.position, transform.rotation);
+
+            var newRotation = new Quaternion();
+            newRotation.SetAxisAngle(new Vector3(0, 0, 1), 90f);
+
+            Instantiate(Bullet, transform.position, newRotation);
+
+            newRotation.SetAxisAngle(new Vector3(0, 0, 1), 180f);
+
+            Instantiate(Bullet, transform.position, newRotation);
 
 
-        transform.position += new Vector3(10, 10, 0) * ToGo;
-        ToGo *= -1;
-
-
-
-        Instantiate(Bullet, transform.position, transform.rotation);
+            curtime = 0f;
+        }
     }
 }

@@ -8,6 +8,9 @@ TagManager:
   - Enemy
   - Key
   - Tank
+  - DesBox
+  - Potion
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -18,7 +21,7 @@ TagManager:
   - Solid
   - Mob
   - Player
-  - 
+  - BossLayer
   - 
   - 
   - 

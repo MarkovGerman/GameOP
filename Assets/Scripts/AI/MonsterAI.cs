@@ -23,7 +23,7 @@ public class MonsterAI : MonoBehaviour
         
         unsypportedTiles = new HashSet<string>();
 
-        unsypportedTiles.Add("originWall");
+        unsypportedTiles.Add("wall4");
         unsypportedTiles.Add("box");
 
         pathTimer = 0f;
@@ -50,7 +50,7 @@ public class MonsterAI : MonoBehaviour
             var secondStep = path[stepCounter];
             //Debug.Log("Moved");
 
-            transform.Translate(secondStep - firstStep);
+            transform.Translate((secondStep - firstStep) - new Vector3(0.5f, 0.5f, 0));
 
             pathTimer = 0f;
             stepCounter++;
@@ -70,16 +70,15 @@ public class MonsterAI : MonoBehaviour
         {  
             var tile = queue.Dequeue();
             var incidentTiles = SurroundTiles(tile);
-            var randomizer = Random.Range(0, incidentTiles.Count - 1);
             foreach (var nextTile in incidentTiles)
             {
-                if (nextTile == incidentTiles[randomizer]) continue;
                 if (track.ContainsKey(nextTile)) continue;
 
                 var tile2Local = tilesMap.WorldToCell((Vector3Int)tile);
 
                 if (unsypportedTiles.Contains(tilesMap.GetTile(tile2Local).name))
                     continue;
+
                 if (doorCoordinates.Contains(tile2Local + new Vector3(0.5f, 0.5f, 0)))
                     continue;
 
@@ -108,6 +107,7 @@ public class MonsterAI : MonoBehaviour
         for (var x = -1; x <= 1; x++)
             for (var y = -1; y <= 1; y++)
             {
+                if (Mathf.Abs(x) == Mathf.Abs(y)) continue;
                 var vec = centralTile + new Vector3Int(x, y, 0);
                 list.Add(vec);
             }

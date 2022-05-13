@@ -10,11 +10,13 @@ public class EnemyInteraction : MonoBehaviour
     public GameObject Key;
     public GameObject Heal;
 
+    private ScoreManagement sm;
+
     //private ScoreManagement sm;
 
     private void Start()
     {
-        //sm = FindObjectOfType<ScoreManagement>();
+        sm = FindObjectOfType<ScoreManagement>();
     }
 
     private void Update()
@@ -22,7 +24,7 @@ public class EnemyInteraction : MonoBehaviour
 
         if (health <= 0)
         {
-            //sm.Add();
+            sm.Add();
             if (GameObject.FindGameObjectsWithTag("Enemy").Length == 2)
                 Instantiate(Key, transform.position, transform.rotation);
             else
