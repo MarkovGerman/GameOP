@@ -11,15 +11,15 @@ public class GunShooting : MonoBehaviour
     private float timeBetweenShoots;
     public float startTimeBetweenShoots = 5f;
 
-    void Update()
+    void FixedUpdate()
     {
-        Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        float angle = Mathf.Atan2(diff.x, -diff.y) * Mathf.Rad2Deg;
+        var diff = Camera.allCameras[0].ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        var angle = Mathf.Atan2(diff.x, -diff.y) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle + offset);
 
         if (timeBetweenShoots <= 0)
         {
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0))
             {
                 Instantiate(bullet, shootPoint.position, transform.rotation);
                 timeBetweenShoots = startTimeBetweenShoots;

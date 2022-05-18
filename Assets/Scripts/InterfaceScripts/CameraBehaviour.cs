@@ -5,18 +5,12 @@ using UnityEngine;
 public class CameraBehaviour : MonoBehaviour
 {
     private GameObject player;
-    private Vector3 offset;
 
-    void Start()
-    {
-        offset = transform.position;
-    }
-
-    //Update is called once per frame
     void Update()
     {
         if (player == null)
-            player = GameObject.Find("Player(Clone)");
-        transform.position = player.transform.position + offset/32;
+            player = GameObject.Find("Player");
+        var playerPos = player.transform.position;
+        transform.position = new Vector3(playerPos.x, playerPos.y, transform.position.z);
     }
 }

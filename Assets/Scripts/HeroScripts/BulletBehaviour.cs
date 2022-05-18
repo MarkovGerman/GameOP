@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class BulletBehaviour : MonoBehaviour
 {
@@ -10,12 +11,23 @@ public class BulletBehaviour : MonoBehaviour
     public int Damage = 1;
     public LayerMask whatIsSolid;
 
-    // Update is called once per frame
+    private Tilemap walls;
+
+    private void Start()
+    {
+        walls = GameObject.Find("walls").GetComponent<Tilemap>();
+    }
+
     void Update()
     {
         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, Distance, whatIsSolid );
 
         LifeTime -= Time.deltaTime;
+
+        var tile = walls.GetTile(walls.WorldToCell(gameObject.transform.position - new Vector3(0.5f, 0.5f)));
+
+        if (tile != null && tile.name == "wall4")
+            Destroy(gameObject);
 
         if (LifeTime <= 0 || Distance <= 0)
         {
@@ -36,14 +48,11 @@ public class BulletBehaviour : MonoBehaviour
             {
                 hitInfo.collider.GetComponent<Fire>().fired = true;
             }
+
             Destroy(gameObject);
         }
+
         transform.Translate(Vector2.right * Speed * Time.deltaTime);
         Distance -= Speed * Time.deltaTime;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
     }
 }
