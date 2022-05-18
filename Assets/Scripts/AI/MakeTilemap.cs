@@ -32,7 +32,7 @@ public class MakeTilemap : MonoBehaviour
     {
         doorCoords = new HashSet<Vector3>();
         tilesDictionary = new Dictionary<char, int>();
-        PrepareDictionary(@"C:\Users\Алексей\GameOP\Assets\TilesDecode\forDict.txt");
+        PrepareDictionary(@"C:\Users\German\GameOP\Assets\TilesDecode\forDict.txt");
 
         map = ParseMapFile("1");
 
@@ -59,7 +59,7 @@ public class MakeTilemap : MonoBehaviour
         streamReader.Close();
     }
 
-    private List<int[]> ParseMapFile(string mapNum, string filePath = @"C:\Users\Алексей\GameOP\Assets\Maps\map")
+    private List<int[]> ParseMapFile(string mapNum, string filePath = @"C:\Users\German\GameOP\Assets\Maps\map")
     {
         var streamReader = new StreamReader(filePath + mapNum + ".txt");
         var line = streamReader.ReadLine();

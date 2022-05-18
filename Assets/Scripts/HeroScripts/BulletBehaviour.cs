@@ -31,11 +31,11 @@ public class BulletBehaviour : MonoBehaviour
                 //Debug.Log("Hit");
             }
 
-            Debug.Log("Hit smth");
-            if (hitInfo.collider.CompareTag("Tank"))
-            {
-                hitInfo.collider.GetComponent<Fire>().fired = true;
-            }
+            // Debug.Log("Hit smth");
+            // if (hitInfo.collider.CompareTag("Tank"))
+            // {
+            //     hitInfo.collider.GetComponent<Fire>().fired = true;
+            // }
             Destroy(gameObject);
         }
         transform.Translate(Vector2.right * Speed * Time.deltaTime);
