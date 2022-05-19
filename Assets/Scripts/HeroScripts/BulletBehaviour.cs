@@ -43,12 +43,20 @@ public class BulletBehaviour : MonoBehaviour
                 //Debug.Log("Hit");
             }
 
+<<<<<<< HEAD
             Debug.Log("Hit smth");
             if (hitInfo.collider.CompareTag("Tank"))
             {
                 hitInfo.collider.GetComponent<Fire>().fired = true;
             }
 
+=======
+            // Debug.Log("Hit smth");
+            // if (hitInfo.collider.CompareTag("Tank"))
+            // {
+            //     hitInfo.collider.GetComponent<Fire>().fired = true;
+            // }
+>>>>>>> origin/KeyBranchCopy
             Destroy(gameObject);
         }
 

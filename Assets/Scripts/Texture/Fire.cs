@@ -1,39 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
-public class Fire : MonoBehaviour
-{
-    public float Damage = 1;
-    public int AttackRange = 100;
-    public LayerMask[] Mask;
-
-    public bool fired;
-
-    public void Start()
-    {
-        Mask = new LayerMask[] { LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Solid") };
-    }
-
-    void Update()
-    {
-        if (fired)
-        {
-            Collider2D[] mobs = Physics2D.OverlapCircleAll(transform.position, AttackRange, Mask[0]);
-
-            for (int i = 0; i < mobs.Length; i++)
-            {
-                mobs[i].GetComponent<Health>().SelfHealth -= Damage;
-            }
-
-            mobs = Physics2D.OverlapCircleAll(transform.position, AttackRange, Mask[1]);
-
-            for (int i = 0; i < mobs.Length; i++)
-            {
-                mobs[i].GetComponent<Health>().SelfHealth -= Damage;
-            }
-
-            Destroy(gameObject);
-        }
-    }
+public class Fire : MonoBehaviour {
+	
+	public float explosionRadius = 5;// радиус поражения
+	public float power = 500;// сила взрыва	
+	
+	private Rigidbody[] physicObject;// тут будут все физ. объекты которые есть на сцене
+	
+	void Start(){
+		physicObject = FindObjectsOfType(typeof(Rigidbody)) as Rigidbody[];// Записываем все физ. объекты
+		for(int i = 0; i < physicObject.Length; i++){
+			if(Vector3.Distance(transform.position,physicObject[i].transform.position) <= explosionRadius){// Исключаем от обработки объекты которые достаточно далеко от взвыва
+				physicObject[i].AddExplosionForce(power,transform.position,explosionRadius);// Создание взрыва, с силой power, в позиции transform.position, c радиусом explosionRadius
+			}
+		}
+	}
 }
