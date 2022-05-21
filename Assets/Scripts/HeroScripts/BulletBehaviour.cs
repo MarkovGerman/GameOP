@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletBehaviour : MonoBehaviour
 {
     public float Speed;
+    public string Enemy;
     public float LifeTime;
     public float Distance;
     public int Damage = 1;
@@ -13,7 +14,7 @@ public class BulletBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, Distance, whatIsSolid );
+        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.forward, Distance, whatIsSolid );
 
         LifeTime -= Time.deltaTime;
 
@@ -25,11 +26,16 @@ public class BulletBehaviour : MonoBehaviour
         if (hitInfo.collider != null)
         {
             Debug.Log(hitInfo.collider);
-            if (hitInfo.collider.CompareTag("Enemy"))
+            
+            if (hitInfo.collider.CompareTag("Enemy") && Enemy == "Enemy")
             {
                 hitInfo.collider.GetComponent<EnemyInteraction>().TakeDamage(Damage);
                 //Debug.Log("Hit");
             }
+            if (hitInfo.collider.CompareTag("Player") && Enemy == "Player")
+            {
+                hitInfo.collider.GetComponent<Health>().SelfHealth -= Damage;
+            }            
 
             // Debug.Log("Hit smth");
             // if (hitInfo.collider.CompareTag("Tank"))
@@ -42,8 +48,5 @@ public class BulletBehaviour : MonoBehaviour
         Distance -= Speed * Time.deltaTime;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-    }
+    private void OnTriggerEnter2D(Collider2D collider){}
 }

@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 10
+  Enemy: Enemy
   LifeTime: 5
   Distance: 20
   Damage: 1

@@ -16,7 +16,7 @@ public class CameraBehaviour : MonoBehaviour
     void Update()
     {
         if (player == null)
-            player = GameObject.Find("Player(Clone)");
+            player = GameObject.Find("Player");
         transform.position = player.transform.position + offset/32;
     }
 }
