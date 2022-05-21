@@ -6,11 +6,14 @@ public class CameraBehaviour : MonoBehaviour
 {
     private GameObject player;
 
+    public int FrameRate;
+
     void Update()
     {
         if (player == null)
             player = GameObject.Find("Player");
         var playerPos = player.transform.position;
-        transform.position = new Vector3(playerPos.x, playerPos.y, transform.position.z);
+        playerPos.z = -10f;
+        transform.position = Vector3.Lerp(transform.position, playerPos, Time.deltaTime * FrameRate);
     }
 }

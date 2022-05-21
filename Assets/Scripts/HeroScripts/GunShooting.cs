@@ -7,6 +7,7 @@ public class GunShooting : MonoBehaviour
     public float offset = -90;
     public GameObject bullet;
     public Transform shootPoint;
+    public string Enemy = "Enemy";
 
     private float timeBetweenShoots;
     public float startTimeBetweenShoots = 5f;
@@ -21,7 +22,10 @@ public class GunShooting : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0))
             {
-                Instantiate(bullet, shootPoint.position, transform.rotation);
+                var bul= Instantiate(bullet, shootPoint.position, transform.rotation);
+
+                bul.GetComponent<BulletBehaviour>().EnemyTag = Enemy;
+
                 timeBetweenShoots = startTimeBetweenShoots;
             }
         }

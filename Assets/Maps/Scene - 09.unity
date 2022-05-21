@@ -254,6 +254,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -120
       objectReference: {fileID: 0}
+    - target: {fileID: 1048482985101327107, guid: cce47afc27d31d248b55bb479b03d5e0, type: 3}
+      propertyPath: startTimeBetweenShoots
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1891664390705382272, guid: cce47afc27d31d248b55bb479b03d5e0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1

@@ -17,18 +17,18 @@ public class Player : MonoBehaviour
     private Vector2 MovementVector;
     private Rigidbody2D rigidBodyComponent;
     public float Speed;
-    
+
+    private Animation anim;
 
     void Start()
     {
         rigidBodyComponent = GetComponent<Rigidbody2D>();
+        anim = GameObject.Find("standartcharacterF").GetComponent<Animation>();
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
-        //CheckHealth();
-
         var w = Input.GetKey(KeyCode.W) ? 1 : 0;
         var s = Input.GetKey(KeyCode.S) ? -1 : 0;
         var a = Input.GetKey(KeyCode.A) ? -1 : 0;
@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
 
 
         MovementVector = new Vector2(a + d, w + s);
+
 
         rigidBodyComponent.velocity = MovementVector * Speed;
         rigidBodyComponent.mass = 10;
@@ -51,9 +52,4 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(-140f, 4f, -1f);
         }
     }
-
-    //public void TakeDamage(int damage)
-    //{
-     //   Health -= damage;
-   // }
 }

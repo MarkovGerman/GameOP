@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3380190998282714186}
   m_Layer: 0
   m_Name: Chest
-  m_TagString: Untagged
+  m_TagString: Chest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Opened: {fileID: 21300000, guid: 06cdeed1bc0cf194594fd0483fff687f, type: 3}
+  Item: {fileID: 0}
 --- !u!61 &3380190998282714186
 BoxCollider2D:
   m_ObjectHideFlags: 0

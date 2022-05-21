@@ -11,6 +11,7 @@ TagManager:
   - DesBox
   - Potion
   - Boss
+  - Chest
   layers:
   - Default
   - TransparentFX

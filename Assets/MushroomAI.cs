@@ -5,13 +5,13 @@ using UnityEngine.Tilemaps;
 
 public class MushroomAI : MonoBehaviour
 {
+    public GameObject DetectArea;
+
     public float PathUpdateTime;
     private float pathTimer;
 
     public float StepUpdateTime;
     private float stepTimer;
-
-    private GameObject player;
 
     private Tilemap floorTiles;
     private Tilemap wallsTiles;
@@ -19,6 +19,8 @@ public class MushroomAI : MonoBehaviour
     private List<Vector3Int> path;
 
     private int stepCounter;
+
+    private bool TurnSprite;
 
     void Start()
     {
@@ -35,30 +37,35 @@ public class MushroomAI : MonoBehaviour
 
     void FixedUpdate()
     {
-        pathTimer += Time.deltaTime;
-
-        if (path == null || pathTimer >= PathUpdateTime || stepCounter == path.Count)
+        if (DetectArea.GetComponent<AreaDetector>().PlayerInArea)
         {
-            var player = GameObject.Find("Player");
-            var playerCoords = floorTiles.WorldToCell(player.transform.position);
-            var mobCoords = floorTiles.WorldToCell(transform.position);
+            pathTimer += Time.deltaTime;
 
-            path = FindPath(mobCoords, playerCoords);
-            stepCounter = 0;
-            pathTimer = 0f;
-        }
-
-        else
-        {
-            if (stepTimer >= StepUpdateTime)
+            if (path == null || pathTimer >= PathUpdateTime || stepCounter == path.Count)
             {
-                transform.position = path[stepCounter] + new Vector3(0.5f, 0.5f);
-                stepCounter++;
-                stepTimer = 0f;
-            }
-            stepTimer += Time.deltaTime;
-        }
+                var player = GameObject.Find("Player");
+                var playerCoords = floorTiles.WorldToCell(player.transform.position);
+                var mobCoords = floorTiles.WorldToCell(transform.position);
 
+                path = FindPath(mobCoords, playerCoords);
+                stepCounter = 0;
+                pathTimer = 0f;
+            }
+
+            else
+            {
+                if (stepTimer >= StepUpdateTime)
+                {
+                    var move = path[stepCounter] + new Vector3(0.5f, 0.5f);
+
+                    transform.position = move;
+
+                    stepCounter++;
+                    stepTimer = 0f;
+                }
+                stepTimer += Time.deltaTime;
+            }
+        }
     }
 
     private List<Vector3Int> FindPath(Vector3Int? start, Vector3Int? end)
@@ -79,7 +86,7 @@ public class MushroomAI : MonoBehaviour
 
                 var wallTile = wallsTiles.GetTile((Vector3Int)nextTile);
 
-                if (wallTile != null && wallTile.name == "wall4")
+                if (wallTile != null && wallTile.name.Substring(0, 4) == "wall")
                     continue;
 
                 track[nextTile] = tile;

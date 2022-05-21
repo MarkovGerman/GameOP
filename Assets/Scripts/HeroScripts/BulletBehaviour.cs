@@ -10,6 +10,7 @@ public class BulletBehaviour : MonoBehaviour
     public float Distance;
     public int Damage = 1;
     public LayerMask whatIsSolid;
+    public string EnemyTag;
 
     private Tilemap walls;
 
@@ -20,13 +21,13 @@ public class BulletBehaviour : MonoBehaviour
 
     void Update()
     {
-        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, Distance, whatIsSolid );
+        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.forward, Distance, whatIsSolid );
 
         LifeTime -= Time.deltaTime;
 
-        var tile = walls.GetTile(walls.WorldToCell(gameObject.transform.position - new Vector3(0.5f, 0.5f)));
+        var tile = walls.GetTile(walls.WorldToCell(gameObject.transform.position));
 
-        if (tile != null && tile.name == "wall4")
+        if (tile != null && tile.name.Substring(0, 4) == "wall")
             Destroy(gameObject);
 
         if (LifeTime <= 0 || Distance <= 0)
@@ -36,27 +37,10 @@ public class BulletBehaviour : MonoBehaviour
 
         if (hitInfo.collider != null)
         {
-            Debug.Log(hitInfo.collider);
-            if (hitInfo.collider.CompareTag("Enemy"))
+            if (hitInfo.collider.CompareTag(EnemyTag))
             {
                 hitInfo.collider.GetComponent<EnemyInteraction>().TakeDamage(Damage);
-                //Debug.Log("Hit");
             }
-
-<<<<<<< HEAD
-            Debug.Log("Hit smth");
-            if (hitInfo.collider.CompareTag("Tank"))
-            {
-                hitInfo.collider.GetComponent<Fire>().fired = true;
-            }
-
-=======
-            // Debug.Log("Hit smth");
-            // if (hitInfo.collider.CompareTag("Tank"))
-            // {
-            //     hitInfo.collider.GetComponent<Fire>().fired = true;
-            // }
->>>>>>> origin/KeyBranchCopy
             Destroy(gameObject);
         }
 
