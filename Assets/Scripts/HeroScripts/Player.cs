@@ -15,17 +15,19 @@ public static class Vector2Extensions
 public class Player : MonoBehaviour
 {
     private Vector2 MovementVector;
-    private Rigidbody2D rigidBodyComponent;
+    private Rigidbody2D rb;
+
     public float Speed;
 
-    private Animation anim;
+    private Animator anim;
+    private SpriteRenderer sprite;
 
     void Start()
     {
-        rigidBodyComponent = GetComponent<Rigidbody2D>();
-        anim = GameObject.Find("standartcharacterF").GetComponent<Animation>();
+        rb = GetComponent<Rigidbody2D>();
+        anim = GameObject.Find("standcharacterF").GetComponent<Animator>();
+        sprite = GameObject.Find("standcharacterF").GetComponent<SpriteRenderer>();
     }
-
 
     void FixedUpdate()
     {
@@ -34,16 +36,17 @@ public class Player : MonoBehaviour
         var a = Input.GetKey(KeyCode.A) ? -1 : 0;
         var d = Input.GetKey(KeyCode.D) ? 1 : 0;
 
-
         MovementVector = new Vector2(a + d, w + s);
 
+        rb.velocity = MovementVector * Speed;
+        rb.mass = 10;
+        rb.angularDrag = 10;
 
-        rigidBodyComponent.velocity = MovementVector * Speed;
-        rigidBodyComponent.mass = 10;
-        rigidBodyComponent.angularDrag = 10;
+        if (rb.velocity.x >= 0) sprite.flipX = false;
+        else sprite.flipX = true;
+
+        anim.SetFloat("SpeedX", Mathf.Abs(rb.velocity.x));
     }
-
-    
 
     void OnCollisionEnter2D(Collision2D collision)
     {

@@ -25,11 +25,11 @@ public class BossAttack : MonoBehaviour
             Instantiate(Bullet, transform.position, transform.rotation);
 
             var newRotation = new Quaternion();
-            newRotation.SetAxisAngle(new Vector3(0, 0, 1), 90f);
+            //newRotation.SetAxisAngle(new Vector3(0, 0, 1), 90f);
 
             Instantiate(Bullet, transform.position, newRotation);
 
-            newRotation.SetAxisAngle(new Vector3(0, 0, 1), 180f);
+            //newRotation.SetAxisAngle(new Vector3(0, 0, 1), 180f);
 
             Instantiate(Bullet, transform.position, newRotation);
 

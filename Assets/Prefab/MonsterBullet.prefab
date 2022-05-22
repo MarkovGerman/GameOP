@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2914035559675427679}
   - component: {fileID: -8337717845741130866}
-  - component: {fileID: 5201028594597820416}
+  - component: {fileID: 3815982954324088428}
   m_Layer: 6
   m_Name: MonsterBullet
   m_TagString: Untagged
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5201028594597820416
+--- !u!114 &3815982954324088428
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,13 +92,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7987254798474048836}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 601addaf6aa15ad499a00b282dfe2463, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b094964751bea5458563c560907df15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
-  LifeTime: 3
-  Distance: 10
+  Speed: 1
+  LifeTime: 10
+  Distance: 30
   Damage: 1
   whatIsSolid:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 64
+  EnemyTag: Player

@@ -22,12 +22,12 @@ public class EnemyAttack : MonoBehaviour
     {
         if (attackDebuff <= 0)
         {
-            Collider2D[] hero = Physics2D.OverlapCircleAll(AttackPosition.position, AttackRange);
+            //Collider2D[] hero = Physics2D.OverlapCircleAll(AttackPosition.position, AttackRange);
 
-            for (int i = 0; i < hero.Length; i++)
-            {
+            //for (int i = 0; i < hero.Length; i++)
+            //{
                //hero[i].GetComponent<Player>().TakeDamage(Damage);
-            }
+            //}
             attackDebuff = AttackStart;
         }
         else

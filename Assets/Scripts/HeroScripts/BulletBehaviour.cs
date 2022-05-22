@@ -12,17 +12,19 @@ public class BulletBehaviour : MonoBehaviour
     public LayerMask whatIsSolid;
     public string EnemyTag;
 
+    private Rigidbody2D rb;
+
     private Tilemap walls;
 
     private void Start()
     {
         walls = GameObject.Find("walls").GetComponent<Tilemap>();
+        rb = GetComponent<Rigidbody2D>();
+        rb.velocity = transform.right * Speed;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.forward, Distance, whatIsSolid );
-
         LifeTime -= Time.deltaTime;
 
         var tile = walls.GetTile(walls.WorldToCell(gameObject.transform.position));
@@ -34,17 +36,21 @@ public class BulletBehaviour : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        Distance -= Speed * Time.deltaTime;
+    }
 
-        if (hitInfo.collider != null)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Hit:" + collision.gameObject.name);
+        if (collision.gameObject.CompareTag(EnemyTag))
         {
-            if (hitInfo.collider.CompareTag(EnemyTag))
-            {
-                hitInfo.collider.GetComponent<EnemyInteraction>().TakeDamage(Damage);
-            }
+            collision.gameObject.GetComponent<Health>().SelfHealth -= Damage;
             Destroy(gameObject);
         }
 
-        transform.Translate(Vector2.right * Speed * Time.deltaTime);
-        Distance -= Speed * Time.deltaTime;
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Solid"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

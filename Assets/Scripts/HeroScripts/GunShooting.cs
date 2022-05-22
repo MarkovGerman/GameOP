@@ -9,6 +9,8 @@ public class GunShooting : MonoBehaviour
     public Transform shootPoint;
     public string Enemy = "Enemy";
 
+    [SerializeField] private AudioSource shootSound;
+
     private float timeBetweenShoots;
     public float startTimeBetweenShoots = 5f;
 
@@ -23,6 +25,8 @@ public class GunShooting : MonoBehaviour
             if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0))
             {
                 var bul= Instantiate(bullet, shootPoint.position, transform.rotation);
+
+                shootSound.Play();
 
                 bul.GetComponent<BulletBehaviour>().EnemyTag = Enemy;
 
