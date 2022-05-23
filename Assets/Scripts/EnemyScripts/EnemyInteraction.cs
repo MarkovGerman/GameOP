@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyInteraction : MonoBehaviour
 {
-    private float health = 3;
+    private float health;
     private ScoreManagement sm;
 
     public int Damage = 1;

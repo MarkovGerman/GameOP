@@ -8,8 +8,8 @@ public class DoorScript : MonoBehaviour
     private int flag = 0;
     private Animation anim;
 
-    [SerializeField] private AudioSource doorOpen;
-    [SerializeField] private AudioSource doorClose;
+    [SerializeField] private AudioSource doorOpenNClose;
+
     private bool opened = false;
 
     private void Start()
@@ -27,7 +27,7 @@ public class DoorScript : MonoBehaviour
                 GameObject.Find("Player").GetComponent<Inventory>().KeysNum--;
                 GameObject.Find("MessageBox").GetComponent<Text>().text = "";
                 anim.Play();
-                doorOpen.Play();
+                doorOpenNClose.Play();
                 opened = true;
             }
             else if (!opened)
@@ -37,9 +37,9 @@ public class DoorScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (opened)
+        if (opened && collision.gameObject.tag == "Player")
         {
-            doorOpen.Play();
+            doorOpenNClose.Play();
             anim.Play();
         }
         else if (collision.gameObject.tag == "Player")
@@ -55,7 +55,6 @@ public class DoorScript : MonoBehaviour
         {
             flag = 0;
             GameObject.Find("MessageBox").GetComponent<Text>().text = "";
-            doorClose.Play();
         }
     }
 }

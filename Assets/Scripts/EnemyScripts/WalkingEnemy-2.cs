@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WalkingEnemy : MonoBehaviour
+public class WalkingEnemy2 : MonoBehaviour
 {
     public GameObject player;
     public GameObject[] boxes;
