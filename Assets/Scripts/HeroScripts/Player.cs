@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
     private Animator anim;
     private SpriteRenderer sprite;
 
+    public Sprite[] Sprites;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -42,10 +44,8 @@ public class Player : MonoBehaviour
         rb.mass = 10;
         rb.angularDrag = 10;
 
-        if (rb.velocity.x >= 0) sprite.flipX = false;
-        else sprite.flipX = true;
-
-        anim.SetFloat("SpeedX", Mathf.Abs(rb.velocity.x));
+        SetSprite();
+        SetAnimationParameters();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -54,5 +54,27 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector3(-140f, 4f, -1f);
         }
+    }
+
+    private void SetSprite()
+    {
+        if (Mathf.Abs(rb.velocity.x) > 0)
+        {
+            sprite.sprite = Sprites[0];
+            if (rb.velocity.x >= 0) sprite.flipX = false;
+            else sprite.flipX = true;
+        }
+
+        else if (Mathf.Abs(rb.velocity.y) > 0)
+        {
+            if (rb.velocity.y >= 0) sprite.sprite = Sprites[1];
+            else sprite.sprite = Sprites[2];
+        }
+    }
+
+    private void SetAnimationParameters()
+    {
+        anim.SetFloat("SpeedX", Mathf.Abs(rb.velocity.x));
+        anim.SetFloat("SpeedY", Mathf.Abs(rb.velocity.y));
     }
 }
