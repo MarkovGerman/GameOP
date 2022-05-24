@@ -6,17 +6,17 @@ public class EnemyShooting : MonoBehaviour
 {
     [SerializeField]
     GameObject bullet;
+
     public Vector3 playerPosition;
     public float offset = -90;
     float fireRate;
     float nextFire;
+
     void Start()
     {
         fireRate = 1f;
         nextFire = Time.time;
     }
-
-    // Update is called once per frame
     void Update()
     {
         playerPosition = GameObject.Find("Player").transform.position;
@@ -28,7 +28,6 @@ public class EnemyShooting : MonoBehaviour
             nextFire = Time.time + fireRate;
         }
     }
-
 
     void CheakifTimeToFire() {
         if(Time.time > nextFire) {

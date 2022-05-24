@@ -6,5 +6,12 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
+    public bool Cheat;
     public float SelfHealth;
+
+    private void Update()
+    {
+        if (Cheat)
+            SelfHealth = 100;
+    }
 }

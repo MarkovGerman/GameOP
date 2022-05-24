@@ -28,13 +28,17 @@ public class SeekingEnemy : MonoBehaviour
         startPos = transform.position;
 
         DebugTimeBtw *= Time.deltaTime;
+
+        GetComponent<EnemyShooting>().enabled = false;
     }
 
     void FixedUpdate()
     {
         if (TriggerArea == null || TriggerArea.GetComponent<AreaDetector>().PlayerInArea)
+        {
             TryToFindPath();
-
+            GetComponent<EnemyShooting>().enabled = true;
+        }
         else
         {
             if ((startPos - transform.position).magnitude >= 1.0f && waitTimer >= WaitTime)

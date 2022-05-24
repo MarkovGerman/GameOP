@@ -8,8 +8,7 @@ public class BulletBehaviour : MonoBehaviour
     public float Speed;
     public float LifeTime;
     public float Distance;
-    public int Damage = 1;
-    public LayerMask whatIsSolid;
+    public float Damage = 1;
     public string EnemyTag;
 
     private Rigidbody2D rb;
@@ -42,6 +41,7 @@ public class BulletBehaviour : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Hit:" + collision.gameObject.name);
+
         if (collision.gameObject.CompareTag(EnemyTag))
         {
             collision.gameObject.GetComponent<Health>().SelfHealth -= Damage;
