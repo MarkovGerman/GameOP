@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 5782187056983667444}
   - component: {fileID: 8666640572703200527}
   - component: {fileID: 2054105485211182628}
+  - component: {fileID: 120139093}
+  - component: {fileID: 120139094}
   m_Layer: 6
   m_Name: Fire
   m_TagString: Tank
@@ -122,6 +124,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad9b5c0ced40294993d6f3653d0d6a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 1
-  AttackRange: 10
-  fired: 0
+  explosionRadius: 5
+  power: 500
+--- !u!111 &120139093
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4801835349674218721}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 77221293a69afc54dabd4698bc8cd65d, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 77221293a69afc54dabd4698bc8cd65d, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!95 &120139094
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4801835349674218721}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 339e744df911c18469d4623062fdf4c8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

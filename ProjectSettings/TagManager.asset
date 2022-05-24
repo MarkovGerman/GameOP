@@ -11,6 +11,10 @@ TagManager:
   - DesBox
   - Potion
   - Boss
+  - Portal
+  - Box
+  - Bullet
+  - Toxin
   layers:
   - Default
   - TransparentFX

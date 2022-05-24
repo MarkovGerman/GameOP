@@ -26,11 +26,21 @@ public class BulletBehaviour : MonoBehaviour
         if (hitInfo.collider != null)
         {
             Debug.Log(hitInfo.collider);
+
+            if (hitInfo.collider.CompareTag("Tank"))
+            {
+                hitInfo.collider.GetComponent<Fire>().Boom();
+                Debug.Log("Tank");
+            }
+            if (hitInfo.collider.CompareTag("Toxin"))
+            {
+                hitInfo.collider.GetComponent<toxin>().Boom();
+                Debug.Log("Tank");
+            }
             
             if (hitInfo.collider.CompareTag("Enemy") && Enemy == "Enemy")
             {
                 hitInfo.collider.GetComponent<EnemyInteraction>().TakeDamage(Damage);
-                //Debug.Log("Hit");
             }
             if (hitInfo.collider.CompareTag("Player") && Enemy == "Player")
             {
