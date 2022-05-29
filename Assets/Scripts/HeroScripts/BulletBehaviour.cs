@@ -25,7 +25,7 @@ public class BulletBehaviour : MonoBehaviour
 
         if (hitInfo.collider != null)
         {
-            Debug.Log(hitInfo.collider);
+            Debug.Log(hitInfo.collider.gameObject.tag);
 
             if (hitInfo.collider.CompareTag("Tank"))
             {

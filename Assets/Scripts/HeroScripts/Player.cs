@@ -14,6 +14,10 @@ public static class Vector2Extensions
 
 public class Player : MonoBehaviour
 {
+    public float ControllersOffTime = 10;
+    private float offTimer;
+
+
     private Vector2 MovementVector;
     private float Count;
     private bool isSlowed;
@@ -22,22 +26,30 @@ public class Player : MonoBehaviour
     
     void Start()
     {
+        ControllersOffTime *= Time.deltaTime;
+        offTimer = 0f;
         rigidBodyComponent = GetComponent<Rigidbody2D>();
+        rigidBodyComponent.mass = 10;
     }
 
     void Update()
     {
         //CheckHealth();
+        if (offTimer <= 0)
+        {
+            var w = Input.GetKey(KeyCode.W) ? 1 : 0;
+            var s = Input.GetKey(KeyCode.S) ? -1 : 0;
+            var a = Input.GetKey(KeyCode.A) ? -1 : 0;
+            var d = Input.GetKey(KeyCode.D) ? 1 : 0;
+            MovementVector = new Vector2(a + d, w + s);
 
-        var w = Input.GetKey(KeyCode.W) ? 1 : 0;
-        var s = Input.GetKey(KeyCode.S) ? -1 : 0;
-        var a = Input.GetKey(KeyCode.A) ? -1 : 0;
-        var d = Input.GetKey(KeyCode.D) ? 1 : 0;
-        MovementVector = new Vector2(a + d, w + s);
-
-        rigidBodyComponent.velocity = MovementVector * Speed;
-        rigidBodyComponent.mass = 10;
-        rigidBodyComponent.angularDrag = 10;
+            rigidBodyComponent.velocity = MovementVector * Speed;         
+            rigidBodyComponent.angularDrag = 10;
+        }
+        else
+        {
+            offTimer -= Time.deltaTime;
+        }
     }
 
 
@@ -67,5 +79,10 @@ public class Player : MonoBehaviour
             Count = 1;
         }
         isSlowed = false;
+    }
+
+    public void SetTimer()
+    {
+        offTimer = ControllersOffTime;
     }
 }

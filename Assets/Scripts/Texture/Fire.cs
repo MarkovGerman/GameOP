@@ -9,12 +9,17 @@ public class Fire : MonoBehaviour {
 	private Vector3 pos;
 	private Vector2 position;
 	private GameObject player;
-	public float explodeForce;
+	public float explodeForce = 3f;
+
+
+
+	public float DamageRadius;
 	
 	private Collider2D[] colliders;// тут будут все физ. объекты которые есть на сцене
 
 	void Start()
 	{
+		explodeForce *= 1000f;
 		animator = gameObject.GetComponent<Animator>();
 		player = GameObject.Find("Player");
 	}
@@ -23,36 +28,52 @@ public class Fire : MonoBehaviour {
 	{
 	}
 
-	void OnTriggerEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-		GetComponent<Collider2D>().enabled = false;
-		pos = transform.position;
-		colliders = Physics2D.OverlapCircleAll(pos, 10);
-
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
+		if (collision.gameObject.CompareTag("Bullet"))
+		{		
 			Boom();
 			Debug.Log("Попал");
-			Destroy(collision.gameObject);
 		}
-    }
+	}
 
 	public void Boom()
 	{
 		animator.SetBool("IsDead", true);
-		if ((transform.position - player.transform.position).magnitude <= 5)
-			player.GetComponent<Health>().SelfHealth -= 1;
-		// foreach (var collider in colliders)
-		// {
-		// 	var other = collider.attachedRigidbody; 
-   		// 	var direction = (other.position - position).normalized;
-   		// 	var distance = (other.position - position).magnitude;
-   		// 	var force = direction * explodeForce * other.mass / distance;
-   		// 	other.AddForceAtPosition(position, force, ForceMode2D.Impulse);
-		// other.velocity += force;
-		// }
+		//if ((pos - player.transform.position).magnitude <= 5)
+		//	player.GetComponent<Health>().SelfHealth -= 1;
+		colliders = Physics2D.OverlapCircleAll(transform.position, DamageRadius);
+		foreach (var collider in colliders)
+		{
+			if (collider.gameObject.tag == "Player" || collider.gameObject.tag == "Mob")
+			{
+				collider.gameObject.GetComponent<Health>().SelfHealth -= 1; // Damage
 
+				var gameObj = collider.gameObject;
+				var rb = gameObj.GetComponent<Rigidbody2D>();
+
+
+				// var other = collider.attachedRigidbody;
+				var distVec = (gameObj.transform.position - pos);
+				var distance = distVec.magnitude;
+				var direction = distVec.normalized;
+
+				
+				var force = direction * explodeForce / (rb.mass * distance); // вычисляем силу взрыва тела в зависимости от расстояния и массы
+																			 //other.AddForceAtPosition(position, force, ForceMode2D.Impulse);
+																			 //other.velocity += force;
+				gameObj.GetComponent<Player>().SetTimer();
+				rb.velocity += (Vector2)force;
+
+			}
+		}
 		Destroy(gameObject, 0.5f);
+
 	}
-	
+
+    private void OnDrawGizmos()
+    {
+		Gizmos.DrawWireSphere(transform.position, DamageRadius);
+    }
+
 }
