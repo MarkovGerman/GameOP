@@ -15,15 +15,15 @@ public static class Vector2Extensions
 public class Player : MonoBehaviour
 {
     private Vector2 MovementVector;
+    private float Count;
+    private bool isSlowed;
     private Rigidbody2D rigidBodyComponent;
     public float Speed;
     
-
     void Start()
     {
         rigidBodyComponent = GetComponent<Rigidbody2D>();
     }
-
 
     void Update()
     {
@@ -33,8 +33,6 @@ public class Player : MonoBehaviour
         var s = Input.GetKey(KeyCode.S) ? -1 : 0;
         var a = Input.GetKey(KeyCode.A) ? -1 : 0;
         var d = Input.GetKey(KeyCode.D) ? 1 : 0;
-
-
         MovementVector = new Vector2(a + d, w + s);
 
         rigidBodyComponent.velocity = MovementVector * Speed;
@@ -42,7 +40,6 @@ public class Player : MonoBehaviour
         rigidBodyComponent.angularDrag = 10;
     }
 
-    
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -52,8 +49,23 @@ public class Player : MonoBehaviour
         }
     }
 
-    //public void TakeDamage(int damage)
-    //{
-     //   Health -= damage;
-   // }
+    public void Froze(float count)
+    {
+        if (!isSlowed)
+        {
+            Count = count;
+            Speed = Speed / count;
+        }
+        isSlowed = true;
+    }
+
+    public void AntiFroze()
+    {
+        if (isSlowed)
+        {
+            Speed *= Count;
+            Count = 1;
+        }
+        isSlowed = false;
+    }
 }

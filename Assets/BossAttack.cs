@@ -11,10 +11,8 @@ public class BossAttack : MonoBehaviour
     Quaternion newRotation;
     public GameObject player;
     float smallAngle;
-
     public float TimeBtwShoots = 10f;
     private float offset = -90;
-
     private float curtime;
 
     private void Start()
@@ -28,11 +26,13 @@ public class BossAttack : MonoBehaviour
     [System.Obsolete]
     void Update()
     {
-        player = GameObject.Find("Player");
-        Health = gameObject.GetComponent<EnemyInteraction>().health;
-        if (Health < 0.2f * startHealth)
-            HardShoot();
-        AttackStandart();
+        if ((player.transform.position - transform.position).magnitude <= 1)
+        {
+            Health = gameObject.GetComponent<EnemyInteraction>().health;
+            if (Health < 0.2f * startHealth)
+                HardShoot();
+            AttackStandart();
+        }
     }
 
     void HardShoot()
@@ -73,8 +73,6 @@ public class BossAttack : MonoBehaviour
                 var rotation = Quaternion.Euler(0f, 0f, angle + offset - smallAngle / 2 + i *smallAngle/6);
                 Instantiate(Bullet, transform.position, rotation);
             }
-            
-        
             curtime = 0f; 
         }
     }

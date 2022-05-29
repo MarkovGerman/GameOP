@@ -36,6 +36,7 @@ public class toxin : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
+			GetComponent<Collider2D>().enabled = false;
 			Boom();
 			Debug.Log("Попал");
 		}
@@ -44,17 +45,6 @@ public class toxin : MonoBehaviour
     public void Boom()
 	{
 		IsBoom = true;
-		foreach (var physicObject in physicsObject)
-		{
-			// Исключаем от обработки объекты которые достаточно далеко от взвыва
-				var position = transform.position;
-				var position2D = new Vector2(position.x, position.y);
-				var pos = new Vector2(position.x, position.y);
-    			var pushDirection = (position2D - pos).normalized;
-
-    			physicObject.AddForce(pushDirection * power, ForceMode2D.Impulse);
-			
-		}
         animator.SetBool("IsBoom", true);
 		time = Time.deltaTime;
 		Destroy(gameObject, 5f);

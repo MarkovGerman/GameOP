@@ -3,42 +3,55 @@ using System.Collections;
 
 public class Fire : MonoBehaviour {
 	
-	public float explosionRadius =30;// радиус поражения
+	public float explosionRadius = 30;// радиус поражения
 	public float power = 30;// сила взрыва	
 	private Animator animator;
+	private Vector3 pos;
+	private Vector2 position;
+	private GameObject player;
+	public float explodeForce;
 	
-	private Rigidbody2D[] physicObjects;// тут будут все физ. объекты которые есть на сцене
+	private Collider2D[] colliders;// тут будут все физ. объекты которые есть на сцене
+
+	void Start()
+	{
+		animator = gameObject.GetComponent<Animator>();
+		player = GameObject.Find("Player");
+	}
 
 	void Update()
 	{
-		physicObjects = FindObjectsOfType(typeof(Rigidbody2D)) as Rigidbody2D[];// Записываем все физ. объекты
-		animator = gameObject.GetComponent<Animator>();
-
 	}
 
 	void OnTriggerEnter2D(Collision2D collision)
     {
+		GetComponent<Collider2D>().enabled = false;
+		pos = transform.position;
+		colliders = Physics2D.OverlapCircleAll(pos, 10);
+
         if (collision.gameObject.CompareTag("Bullet"))
         {
 			Boom();
 			Debug.Log("Попал");
+			Destroy(collision.gameObject);
 		}
     }
 
 	public void Boom()
 	{
-		foreach (var physicObject in physicObjects)
-		{
-			// Исключаем от обработки объекты которые достаточно далеко от взвыва
-				var position = transform.position;
-				var position2D = new Vector2(position.x, position.y);
-				var pos = new Vector2(position.x, position.y);
-    			var pushDirection = (position2D - pos).normalized;
+		animator.SetBool("IsDead", true);
+		if ((transform.position - player.transform.position).magnitude <= 5)
+			player.GetComponent<Health>().SelfHealth -= 1;
+		// foreach (var collider in colliders)
+		// {
+		// 	var other = collider.attachedRigidbody; 
+   		// 	var direction = (other.position - position).normalized;
+   		// 	var distance = (other.position - position).magnitude;
+   		// 	var force = direction * explodeForce * other.mass / distance;
+   		// 	other.AddForceAtPosition(position, force, ForceMode2D.Impulse);
+		// other.velocity += force;
+		// }
 
-    			physicObject.AddForce(pushDirection * power, ForceMode2D.Impulse);
-			
-		}
-        animator.SetBool("IsDead", true);
 		Destroy(gameObject, 0.5f);
 	}
 	
