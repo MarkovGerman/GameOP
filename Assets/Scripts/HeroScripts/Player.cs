@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
 
     public Sprite[] Sprites;
 
+    public float Surrounds;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -76,5 +78,10 @@ public class Player : MonoBehaviour
     {
         anim.SetFloat("SpeedX", Mathf.Abs(rb.velocity.x));
         anim.SetFloat("SpeedY", Mathf.Abs(rb.velocity.y));
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, Surrounds);
     }
 }

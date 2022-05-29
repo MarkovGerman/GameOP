@@ -5,6 +5,8 @@ using UnityEngine.Tilemaps;
 
 public class MushroomAI : MonoBehaviour
 {
+    public float Speed;
+
     public GameObject DetectArea;
 
     public float PathUpdateTime;
@@ -21,9 +23,14 @@ public class MushroomAI : MonoBehaviour
     private int stepCounter;
 
     private bool TurnSprite;
+    private bool stepping = false;
+    private Rigidbody2D rb;
+    private Vector3 curTarget;
 
     void Start()
     {
+        rb = gameObject.GetComponent<Rigidbody2D>();
+
         floorTiles = GameObject.Find("floor").GetComponent<Tilemap>();
         wallsTiles = GameObject.Find("walls").GetComponent<Tilemap>();
 
@@ -41,29 +48,42 @@ public class MushroomAI : MonoBehaviour
         {
             pathTimer += Time.deltaTime;
 
-            if (path == null || pathTimer >= PathUpdateTime || stepCounter == path.Count)
+            if (stepping)
             {
-                var player = GameObject.Find("Player");
-                var playerCoords = floorTiles.WorldToCell(player.transform.position);
-                var mobCoords = floorTiles.WorldToCell(transform.position);
-
-                path = FindPath(mobCoords, playerCoords);
-                stepCounter = 0;
-                pathTimer = 0f;
+                if (Vector2.Distance(transform.position, curTarget) < 0.1f)
+                {
+                    rb.velocity = Vector2.zero;
+                    stepping = false;
+                }
             }
 
             else
             {
-                if (stepTimer >= StepUpdateTime)
+                if (path == null || pathTimer >= PathUpdateTime || stepCounter == path.Count)
                 {
-                    var move = path[stepCounter] + new Vector3(0.5f, 0.5f);
+                    var player = GameObject.Find("Player");
+                    var playerCoords = floorTiles.WorldToCell(player.transform.position);
+                    var mobCoords = floorTiles.WorldToCell(transform.position);
 
-                    transform.position = move;
-
-                    stepCounter++;
-                    stepTimer = 0f;
+                    path = FindPath(mobCoords, playerCoords);
+                    stepCounter = 0;
+                    pathTimer = 0f;
                 }
-                stepTimer += Time.deltaTime;
+
+                else
+                {
+                    if (stepTimer >= StepUpdateTime)
+                    {
+                        stepping = true;
+                        curTarget = path[stepCounter] + new Vector3(0.5f, 0.5f);
+
+                        rb.velocity = (curTarget - transform.position).normalized * Speed;
+
+                        stepCounter++;
+                        stepTimer = 0f;
+                    }
+                    stepTimer += Time.deltaTime;
+                }
             }
         }
     }

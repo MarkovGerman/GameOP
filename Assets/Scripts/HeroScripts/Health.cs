@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
+    public float maxHealth;
     public bool Cheat;
     public float SelfHealth;
 
