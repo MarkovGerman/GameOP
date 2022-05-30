@@ -22,10 +22,11 @@ public class MushroomAI : MonoBehaviour
 
     private int stepCounter;
 
-    private bool TurnSprite;
     private bool stepping = false;
     private Rigidbody2D rb;
     private Vector3 curTarget;
+
+    private GameObject player;
 
     void Start()
     {
@@ -47,21 +48,21 @@ public class MushroomAI : MonoBehaviour
         if (DetectArea.GetComponent<AreaDetector>().PlayerInArea)
         {
             pathTimer += Time.deltaTime;
-
+            player = GameObject.Find("Player");
             if (stepping)
             {
-                if (Vector2.Distance(transform.position, curTarget) < 0.1f)
+                if (floorTiles.WorldToCell(transform.position - new Vector3(0.5f, 0.5f)) == curTarget - new Vector3(0.5f, 0.5f))
                 {
                     rb.velocity = Vector2.zero;
                     stepping = false;
                 }
+                
             }
 
-            else
+            else if (Vector2.Distance(transform.position, player.transform.position) > 1.5f)
             {
                 if (path == null || pathTimer >= PathUpdateTime || stepCounter == path.Count)
                 {
-                    var player = GameObject.Find("Player");
                     var playerCoords = floorTiles.WorldToCell(player.transform.position);
                     var mobCoords = floorTiles.WorldToCell(transform.position);
 

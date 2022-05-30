@@ -13,6 +13,7 @@ TagManager:
   - Boss
   - Chest
   - Walls
+  - MiniMap
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - Chest
   - Walls
   - Mob
-  - 
+  - MiniMap
   - 
   - 
   - 
