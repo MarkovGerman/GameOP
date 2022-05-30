@@ -27,4 +27,5 @@ public class AreaDetector : MonoBehaviour
             player = null;
         }
     }
+
 }

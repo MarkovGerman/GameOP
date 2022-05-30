@@ -133,6 +133,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 26e9b9e6a67b18e43b9996e3bd95ec6c, type: 3}
   - {fileID: 21300000, guid: 8728e00aa9dc2c8438954e1b3417e2b8, type: 3}
   - {fileID: 21300000, guid: d7f174ef58164c643a7b6b85b9a3552f, type: 3}
+  Surrounds: 0
 --- !u!70 &7817529793047151338
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -146,8 +147,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0076823235, y: 0.039928675}
-  m_Size: {x: 0.47759342, y: 0.7817645}
+  m_Offset: {x: -0.013230324, y: 0.0038068295}
+  m_Size: {x: 0.43576813, y: 0.8540082}
   m_Direction: 0
 --- !u!114 &1718696971872781348
 MonoBehaviour:
@@ -161,6 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e0337e2cff877418863a21b6744edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cheat: 0
   SelfHealth: 3
 --- !u!114 &5358744169239853423
 MonoBehaviour:
