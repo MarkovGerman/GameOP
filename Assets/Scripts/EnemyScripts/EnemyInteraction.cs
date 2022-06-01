@@ -8,9 +8,11 @@ public class EnemyInteraction : MonoBehaviour
     public int Damage = 1;
     public GameObject Key;
     public GameObject Heal;
+    private Animator animator;
 
     private void Start()
     { 
+        animator = GetComponent<Animator>();
         sm = FindObjectOfType<ScoreManagement>();
     }
 
@@ -20,7 +22,8 @@ public class EnemyInteraction : MonoBehaviour
         if (health <= 0)
         {
             sm.Add();
-            Destroy(gameObject);
+            animator.SetBool("IsDead", true);
+            Destroy(gameObject, Time.deltaTime * 9);
         }
     }
 }
