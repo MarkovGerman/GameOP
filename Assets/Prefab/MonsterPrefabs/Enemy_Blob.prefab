@@ -966,7 +966,7 @@ MonoBehaviour:
   WaitTime: 360
   minDistance: 5
   RandomnessRange: 5
-  CircleRadius: 10
+  CircleRadius: 5
   SteeringTime: 20
 --- !u!114 &102213737701914837
 MonoBehaviour:

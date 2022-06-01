@@ -5,32 +5,32 @@ using UnityEngine.Tilemaps;
 
 public class MushroomAI : MonoBehaviour
 {
+    public bool IsStepping;
     public float Speed;
-
+    public AudioSource Stepping;
     public GameObject DetectArea;
-
     public float PathUpdateTime;
-    private float pathTimer;
-
     public float StepUpdateTime;
+
+    private float pathTimer;
     private float stepTimer;
 
     private Tilemap floorTiles;
     private Tilemap wallsTiles;
 
     private List<Vector3Int> path;
-
     private int stepCounter;
-
-    private bool stepping = false;
-    private Rigidbody2D rb;
     private Vector3 curTarget;
 
     private GameObject player;
+    private Transform playerPos;
 
     void Start()
     {
-        rb = gameObject.GetComponent<Rigidbody2D>();
+        IsStepping = true;
+
+        player = GameObject.FindGameObjectWithTag("Player");
+
 
         floorTiles = GameObject.Find("floor").GetComponent<Tilemap>();
         wallsTiles = GameObject.Find("walls").GetComponent<Tilemap>();
@@ -45,46 +45,38 @@ public class MushroomAI : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (DetectArea.GetComponent<AreaDetector>().PlayerInArea)
+        if (DetectArea.GetComponent<AreaDetector>().PlayerInArea && IsStepping)
         {
             pathTimer += Time.deltaTime;
-            player = GameObject.Find("Player");
-            if (stepping)
+
+            playerPos = player.transform;
+
+            if ((path == null || pathTimer >= PathUpdateTime || stepCounter == path.Count))
             {
-                if (floorTiles.WorldToCell(transform.position - new Vector3(0.5f, 0.5f)) == curTarget - new Vector3(0.5f, 0.5f))
-                {
-                    rb.velocity = Vector2.zero;
-                    stepping = false;
-                }
-                
+                var playerCoords = floorTiles.WorldToCell(playerPos.position);
+                var mobCoords = floorTiles.WorldToCell(transform.position);
+
+                path = FindPath(mobCoords, playerCoords);
+                stepCounter = 0;
+                pathTimer = 0f;
             }
 
-            else if (Vector2.Distance(transform.position, player.transform.position) > 1.5f)
+            else
             {
-                if (path == null || pathTimer >= PathUpdateTime || stepCounter == path.Count)
+                if (stepTimer >= StepUpdateTime)
                 {
-                    var playerCoords = floorTiles.WorldToCell(player.transform.position);
-                    var mobCoords = floorTiles.WorldToCell(transform.position);
+                    curTarget = path[stepCounter] + new Vector3(0.5f, 0.5f);
 
-                    path = FindPath(mobCoords, playerCoords);
-                    stepCounter = 0;
-                    pathTimer = 0f;
+                    transform.position = Vector2.MoveTowards(transform.position, curTarget, 1f);
+
+                    if (!Stepping.isPlaying) Stepping.Play();
+
+                    stepCounter++;
+                    stepTimer = 0f;
                 }
-
-                else
-                {
-                    if (stepTimer >= StepUpdateTime)
-                    {
-                        stepping = true;
-                        curTarget = path[stepCounter] + new Vector3(0.5f, 0.5f);
-
-                        rb.velocity = (curTarget - transform.position).normalized * Speed;
-
-                        stepCounter++;
-                        stepTimer = 0f;
-                    }
-                    stepTimer += Time.deltaTime;
-                }
+                stepTimer += Time.deltaTime;
+                if (Vector2.Distance(playerPos.position, transform.position) < 1.5f)
+                    Stepping.Stop();
             }
         }
     }
@@ -115,7 +107,7 @@ public class MushroomAI : MonoBehaviour
             }
         }
 
-        var pathItem = track[track[end]];
+        var pathItem = track[end];
         var result = new List<Vector3Int>();
         while (pathItem != null)
         {

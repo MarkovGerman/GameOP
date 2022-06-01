@@ -7,10 +7,11 @@ public class DoorScript : MonoBehaviour
 {
     private int flag = 0;
     private Animation anim;
+    private SpriteRenderer minimapSprite;
 
     [SerializeField] private AudioSource doorOpenNClose;
 
-    private bool opened = false;
+    public bool Opened = false;
 
     private void Start()
     {
@@ -20,7 +21,7 @@ public class DoorScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (flag == 1 && Input.GetKey(KeyCode.E) && !opened)
+        if (flag == 1 && Input.GetKey(KeyCode.E) && !Opened)
         {
             if (GameObject.Find("Player").GetComponent<Inventory>().KeysNum > 0)
             {
@@ -28,16 +29,16 @@ public class DoorScript : MonoBehaviour
                 GameObject.Find("MessageBox").GetComponent<Text>().text = "";
                 anim.Play();
                 doorOpenNClose.Play();
-                opened = true;
+                Opened = true;
             }
-            else if (!opened)
+            else if (!Opened)
                 GameObject.Find("MessageBox").GetComponent<Text>().text = "Ops, you haven't got any keys (";
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (opened && collision.gameObject.tag == "Player")
+        if (Opened && collision.gameObject.tag == "Player")
         {
             doorOpenNClose.Play();
             anim.Play();

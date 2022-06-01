@@ -40,7 +40,7 @@ public class SeekingEnemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (TriggerArea.GetComponent<AreaDetector>().PlayerInArea || FindPlayer())
+        if (FindPlayer()|| TriggerArea.GetComponent<AreaDetector>().PlayerInArea)
         {
             TryToFindPath();
             GetComponent<EnemyShooting>().enabled = true;

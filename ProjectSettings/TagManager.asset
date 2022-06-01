@@ -14,6 +14,7 @@ TagManager:
   - Chest
   - Walls
   - MiniMap
+  - Gun
   layers:
   - Default
   - TransparentFX
