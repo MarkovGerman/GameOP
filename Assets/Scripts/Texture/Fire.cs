@@ -62,7 +62,8 @@ public class Fire : MonoBehaviour {
 				var force = direction * explodeForce / (rb.mass * distance); // вычисляем силу взрыва тела в зависимости от расстояния и массы
 																			 //other.AddForceAtPosition(position, force, ForceMode2D.Impulse);
 																			 //other.velocity += force;
-				gameObj.GetComponent<Player>().SetTimer();
+				if (collider.gameObject.tag == "Player") 
+					gameObj.GetComponent<Player>().OffController();
 				rb.velocity += (Vector2)force;
 
 			}

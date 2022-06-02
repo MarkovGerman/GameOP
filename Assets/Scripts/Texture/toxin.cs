@@ -11,6 +11,7 @@ public class toxin : MonoBehaviour
 	Rigidbody2D[] physicsObject;// тут будут все физ. объекты которые есть на сцене
     private Animator animator;
 	private GameObject player;
+
     void Start()
     {
     	physicsObject = FindObjectsOfType(typeof(Rigidbody2D)) as Rigidbody2D[];// Записываем все физ. объекты
@@ -32,15 +33,15 @@ public class toxin : MonoBehaviour
 		}
 	}
 
-    void OnTriggerEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
+		if (collision.gameObject.CompareTag("Bullet"))
+		{
 			GetComponent<Collider2D>().enabled = false;
 			Boom();
 			Debug.Log("Попал");
 		}
-    }
+	}
 
     public void Boom()
 	{
