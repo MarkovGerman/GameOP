@@ -11,6 +11,10 @@ public static class Vector2Extensions
 
 public class Player : MonoBehaviour
 {
+    public float ControllersOffTime = 10;
+    private float offTimer;
+
+
     private Vector2 MovementVector;
     private Rigidbody2D rb;
     public bool IsOffed;

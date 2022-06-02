@@ -54,7 +54,7 @@ public class Fire : MonoBehaviour {
 
 
 				// var other = collider.attachedRigidbody;
-				var distVec = gameObj.transform.position - pos;
+				var distVec = (gameObj.transform.position - pos);
 				var distance = distVec.magnitude;
 				var direction = distVec.normalized;
 
@@ -62,7 +62,7 @@ public class Fire : MonoBehaviour {
 				var force = direction * explodeForce / (rb.mass * distance); // вычисляем силу взрыва тела в зависимости от расстояния и массы
 																			 //other.AddForceAtPosition(position, force, ForceMode2D.Impulse);
 																			 //other.velocity += force;
-				//gameObj.GetComponent<Player>().SetTimer();
+				gameObj.GetComponent<Player>().SetTimer();
 				rb.velocity += (Vector2)force;
 
 			}

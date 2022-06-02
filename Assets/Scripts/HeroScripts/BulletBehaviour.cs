@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 public class BulletBehaviour : MonoBehaviour
 {
     public float Speed;
+    public string Enemy;
     public float LifeTime;
     public float Distance;
     public float Damage = 1;
