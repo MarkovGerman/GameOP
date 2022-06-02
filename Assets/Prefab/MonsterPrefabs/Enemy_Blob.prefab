@@ -778,8 +778,8 @@ GameObject:
   - component: {fileID: 1461055404703550085}
   - component: {fileID: 4428545214205688116}
   - component: {fileID: 9217073013135325324}
-  - component: {fileID: 8181741454750617457}
   - component: {fileID: 102213737701914837}
+  - component: {fileID: 6422799076954598883}
   m_Layer: 14
   m_Name: Enemy_Blob
   m_TagString: Enemy
@@ -864,11 +864,11 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7597484979260729493}
-  m_BodyType: 2
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -950,24 +950,6 @@ MonoBehaviour:
   bullet: {fileID: 3806211696134394751, guid: bdfd49eceab27f74e9fabb6bf6784e47, type: 3}
   playerPosition: {x: 0, y: 0, z: 0}
   offset: -90
---- !u!114 &8181741454750617457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7597484979260729493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 764b8d0b86b99724c8a15193249ed343, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TriggerArea: {fileID: 0}
-  WaitTime: 360
-  minDistance: 5
-  RandomnessRange: 5
-  CircleRadius: 5
-  SteeringTime: 20
 --- !u!114 &102213737701914837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -980,3 +962,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46b34e2f04bce554c91897360739d2fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6422799076954598883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7597484979260729493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646df018658bef44991b1d65a2002f53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TriggerArea: {fileID: 0}
+  CentralPoint: {fileID: 0}
+  MovingRadius: 0
+  StepDelta: 0.01

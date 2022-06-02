@@ -13,8 +13,9 @@ public class GunTextureScript : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.E) && isNear)
         {
-            Destroy(GameObject.FindGameObjectWithTag("Gun"));
             var obj = Instantiate(gun, player.transform);
+            Destroy(GameObject.FindGameObjectWithTag("Gun"));
+           
             obj.transform.SetParent(player.transform);
             Destroy(gameObject);
         }

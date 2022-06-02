@@ -11,6 +11,11 @@ public class MultiGunBehaviour : MonoBehaviour
     private float timeBetweenShoots;
     public float startTimeBetweenShoots = 5f;
 
+    private void Start()
+    {
+        startTimeBetweenShoots *= Time.deltaTime;
+    }
+
     void FixedUpdate()
     {
         var diff = Camera.allCameras[0].ScreenToWorldPoint(Input.mousePosition) - transform.position;
