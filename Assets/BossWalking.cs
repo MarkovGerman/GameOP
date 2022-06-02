@@ -2,7 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum Direction{Right = 0, Left = 1, Left2 =2, Right2 = 3, Up = 4, Down = 5, Down2 = 6, Up2 = 7};
+enum Direction
+{
+    Right = 0, 
+    Left = 1, 
+    Left2 =2, 
+    Right2 = 3, 
+    Up = 4, 
+    Down = 5, 
+    Down2 = 6, 
+    Up2 = 7
+};
+
 public class BossWalking : MonoBehaviour
 {
     private Rigidbody2D rb2;

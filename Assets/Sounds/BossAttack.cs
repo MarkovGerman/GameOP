@@ -20,7 +20,7 @@ public class BossAttack : MonoBehaviour
         curtime = 0f;
         TimeBtwShoots *= Time.deltaTime;
         player = GameObject.Find("Player");
-        startHealth = gameObject.GetComponent<EnemyInteraction>().health;
+        startHealth = GetComponent<Health>().SelfHealth;
     }
 
     [System.Obsolete]
@@ -28,7 +28,7 @@ public class BossAttack : MonoBehaviour
     {
         if ((player.transform.position - transform.position).magnitude <= 1)
         {
-            Health = gameObject.GetComponent<EnemyInteraction>().health;
+            Health = GetComponent<Health>().SelfHealth;
             if (Health < 0.2f * startHealth)
                 HardShoot();
             AttackStandart();

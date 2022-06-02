@@ -11,6 +11,7 @@ public static class Vector2Extensions
 
 public class Player : MonoBehaviour
 {
+
     public float ControllersOffTime = 10;
     private float offTimer;
 
@@ -29,6 +30,8 @@ public class Player : MonoBehaviour
     public float Surrounds;
 
     private float offTime;
+    private float Count;
+    private bool isSlowed;
 
     void Start()
     {
@@ -102,5 +105,30 @@ public class Player : MonoBehaviour
     {
         IsOffed = true;
         offTime = 20 * Time.deltaTime;
+    }
+
+    public void Froze(float count)
+    {
+        if (!isSlowed)
+        {
+            Count = count;
+            Speed = Speed / count;
+        }
+        isSlowed = true;
+    }
+
+    public void AntiFroze()
+    {
+        if (isSlowed)
+        {
+            Speed *= Count;
+            Count = 1;
+        }
+        isSlowed = false;
+    }
+
+    public void SetTimer()
+    {
+        offTimer = ControllersOffTime;
     }
 }

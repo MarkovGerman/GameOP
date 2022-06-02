@@ -40,7 +40,7 @@ public class SeekingEnemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (FindPlayer()|| TriggerArea.GetComponent<AreaDetector>().PlayerInArea)
+        if (TriggerArea.GetComponent<AreaDetector>().PlayerInArea)
         {
             TryToFindPath();
             GetComponent<EnemyShooting>().enabled = true;
@@ -52,19 +52,6 @@ public class SeekingEnemy : MonoBehaviour
             target = (Vector2)startPos + Random.insideUnitCircle * 10f;
             Wander();
         }
-    }
-
-    private bool FindPlayer()
-    {
-        var hits = Physics2D.OverlapCircleAll(transform.position, CircleRadius);
-
-        foreach(var hit in hits)
-        {
-            if (hit.gameObject.tag == "Player")
-                return true;
-        }
-
-        return false;
     }
 
     private void TryToFindPath()
