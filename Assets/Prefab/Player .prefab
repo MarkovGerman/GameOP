@@ -246,7 +246,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e0337e2cff877418863a21b6744edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
   Cheat: 0
   SelfHealth: 3
 --- !u!114 &5358744169239853423
