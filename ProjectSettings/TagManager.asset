@@ -13,6 +13,8 @@ TagManager:
   - Boss
   - Chest
   - Walls
+  - MiniMap
+  - Gun
   layers:
   - Default
   - TransparentFX
@@ -29,7 +31,7 @@ TagManager:
   - Chest
   - Walls
   - Mob
-  - 
+  - MiniMap
   - 
   - 
   - 

@@ -5,23 +5,29 @@ using UnityEngine.Tilemaps;
 
 public class MushroomAI : MonoBehaviour
 {
+<<<<<<< HEAD
     public float Speed;
 
+=======
+    public bool IsStepping;
+    public float Speed;
+    public AudioSource Stepping;
+>>>>>>> 765ac91493ecfb89f3c006b5abadece97a5daf30
     public GameObject DetectArea;
-
     public float PathUpdateTime;
-    private float pathTimer;
-
     public float StepUpdateTime;
+
+    private float pathTimer;
     private float stepTimer;
 
     private Tilemap floorTiles;
     private Tilemap wallsTiles;
 
     private List<Vector3Int> path;
-
     private int stepCounter;
+    private Vector3 curTarget;
 
+<<<<<<< HEAD
     private bool TurnSprite;
     private bool stepping = false;
     private Rigidbody2D rb;
@@ -30,6 +36,17 @@ public class MushroomAI : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+=======
+    private GameObject player;
+    private Transform playerPos;
+
+    void Start()
+    {
+        IsStepping = true;
+
+        player = GameObject.FindGameObjectWithTag("Player");
+
+>>>>>>> 765ac91493ecfb89f3c006b5abadece97a5daf30
 
         floorTiles = GameObject.Find("floor").GetComponent<Tilemap>();
         wallsTiles = GameObject.Find("walls").GetComponent<Tilemap>();
@@ -44,10 +61,11 @@ public class MushroomAI : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (DetectArea.GetComponent<AreaDetector>().PlayerInArea)
+        if (DetectArea.GetComponent<AreaDetector>().PlayerInArea && IsStepping)
         {
             pathTimer += Time.deltaTime;
 
+<<<<<<< HEAD
             if (stepping)
             {
                 if (Vector2.Distance(transform.position, curTarget) < 0.1f)
@@ -55,6 +73,18 @@ public class MushroomAI : MonoBehaviour
                     rb.velocity = Vector2.zero;
                     stepping = false;
                 }
+=======
+            playerPos = player.transform;
+
+            if ((path == null || pathTimer >= PathUpdateTime || stepCounter == path.Count))
+            {
+                var playerCoords = floorTiles.WorldToCell(playerPos.position);
+                var mobCoords = floorTiles.WorldToCell(transform.position);
+
+                path = FindPath(mobCoords, playerCoords);
+                stepCounter = 0;
+                pathTimer = 0f;
+>>>>>>> 765ac91493ecfb89f3c006b5abadece97a5daf30
             }
 
             else
@@ -72,18 +102,32 @@ public class MushroomAI : MonoBehaviour
 
                 else
                 {
+<<<<<<< HEAD
                     if (stepTimer >= StepUpdateTime)
                     {
                         stepping = true;
                         curTarget = path[stepCounter] + new Vector3(0.5f, 0.5f);
 
                         rb.velocity = (curTarget - transform.position).normalized * Speed;
+=======
+                    curTarget = path[stepCounter] + new Vector3(0.5f, 0.5f);
+
+                    transform.position = Vector2.MoveTowards(transform.position, curTarget, 1f);
+
+                    if (!Stepping.isPlaying) Stepping.Play();
+>>>>>>> 765ac91493ecfb89f3c006b5abadece97a5daf30
 
                         stepCounter++;
                         stepTimer = 0f;
                     }
                     stepTimer += Time.deltaTime;
                 }
+<<<<<<< HEAD
+=======
+                stepTimer += Time.deltaTime;
+                if (Vector2.Distance(playerPos.position, transform.position) < 1.5f)
+                    Stepping.Stop();
+>>>>>>> 765ac91493ecfb89f3c006b5abadece97a5daf30
             }
         }
     }
@@ -114,7 +158,7 @@ public class MushroomAI : MonoBehaviour
             }
         }
 
-        var pathItem = track[track[end]];
+        var pathItem = track[end];
         var result = new List<Vector3Int>();
         while (pathItem != null)
         {

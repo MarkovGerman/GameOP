@@ -19,23 +19,23 @@ public class ChestScript : MonoBehaviour
         {
             opened = true;
             gameObject.GetComponent<SpriteRenderer>().sprite = Opened;
-            if (Item != null) Instantiate(Item);
+            if (Item != null) Instantiate(Item, transform);
         }
 
         if (GameObject.Find("Player").GetComponent<ScoreManagement>().Score >= PointsToOpen)
             CanBeOpened = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player" && CanBeOpened)
         {
-            if (!opened)GameObject.Find("MessageBox").GetComponent<Text>().text = "Press E to open chest!";
+            if (!opened) GameObject.Find("MessageBox").GetComponent<Text>().text = "Press E to open chest!";
             toOpen = 1;
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         GameObject.Find("MessageBox").GetComponent<Text>().text = "";
         toOpen = 0;

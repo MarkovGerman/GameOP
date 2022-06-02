@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+
 
 public static class Vector2Extensions
 {
@@ -16,6 +13,7 @@ public class Player : MonoBehaviour
 {
     private Vector2 MovementVector;
     private Rigidbody2D rb;
+    public bool IsOffed;
 
     public float Speed;
 
@@ -26,28 +24,43 @@ public class Player : MonoBehaviour
 
     public float Surrounds;
 
+<<<<<<< HEAD
+=======
+    private float offTime;
+
+>>>>>>> 765ac91493ecfb89f3c006b5abadece97a5daf30
     void Start()
     {
+        IsOffed = false;
         rb = GetComponent<Rigidbody2D>();
         anim = GameObject.Find("standcharacterF").GetComponent<Animator>();
         sprite = GameObject.Find("standcharacterF").GetComponent<SpriteRenderer>();
+        rb.mass = 10;
     }
 
     void FixedUpdate()
     {
-        var w = Input.GetKey(KeyCode.W) ? 1 : 0;
-        var s = Input.GetKey(KeyCode.S) ? -1 : 0;
-        var a = Input.GetKey(KeyCode.A) ? -1 : 0;
-        var d = Input.GetKey(KeyCode.D) ? 1 : 0;
+        if (!IsOffed)
+        {
+            var w = Input.GetKey(KeyCode.W) ? 1 : 0;
+            var s = Input.GetKey(KeyCode.S) ? -1 : 0;
+            var a = Input.GetKey(KeyCode.A) ? -1 : 0;
+            var d = Input.GetKey(KeyCode.D) ? 1 : 0;
 
-        MovementVector = new Vector2(a + d, w + s);
+            MovementVector = new Vector2(a + d, w + s).normalized;
 
-        rb.velocity = MovementVector * Speed;
-        rb.mass = 10;
-        rb.angularDrag = 10;
+            rb.velocity = MovementVector * Speed;
+            rb.angularDrag = 10;
 
-        SetSprite();
-        SetAnimationParameters();
+            SetSprite();
+            SetAnimationParameters();
+        }
+
+        else if (offTime > 0f)
+        {
+            offTime -= Time.deltaTime;
+        }
+        else IsOffed = false;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -84,4 +97,12 @@ public class Player : MonoBehaviour
     {
         Gizmos.DrawWireSphere(transform.position, Surrounds);
     }
+<<<<<<< HEAD
+=======
+    public void OffController()
+    {
+        IsOffed = true;
+        offTime = 20 * Time.deltaTime;
+    }
+>>>>>>> 765ac91493ecfb89f3c006b5abadece97a5daf30
 }
