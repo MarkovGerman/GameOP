@@ -23,7 +23,7 @@ public class EnemyInteraction : MonoBehaviour
         {
             sm.Add();
             animator.SetBool("IsDead", true);
-            Destroy(gameObject, 0.5f);
+            Destroy(gameObject);
         }
     }
 }
