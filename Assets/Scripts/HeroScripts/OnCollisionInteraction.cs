@@ -8,6 +8,7 @@ public class OnCollisionInteraction : MonoBehaviour
     {
         if (collision.gameObject.tag == "Key")
         {
+            collision.gameObject.GetComponent<Animation>().Play();
             gameObject.GetComponent<Inventory>().KeysNum++;
             Destroy(collision.gameObject);
         }

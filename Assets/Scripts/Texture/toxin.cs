@@ -11,8 +11,9 @@ public class toxin : MonoBehaviour
 	Rigidbody2D[] physicsObject;// тут будут все физ. объекты которые есть на сцене
     private Animator animator;
 	private GameObject player;
+	[SerializeField] private AudioSource explosionSound;
 
-    void Start()
+	void Start()
     {
     	physicsObject = FindObjectsOfType(typeof(Rigidbody2D)) as Rigidbody2D[];// Записываем все физ. объекты
         animator = gameObject.GetComponent<Animator>();
@@ -38,6 +39,7 @@ public class toxin : MonoBehaviour
 		if (collision.gameObject.CompareTag("Bullet"))
 		{
 			GetComponent<Collider2D>().enabled = false;
+			explosionSound.Play();
 			Boom();
 			Debug.Log("Попал");
 		}

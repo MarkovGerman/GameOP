@@ -15,6 +15,8 @@ public class BulletBehaviour : MonoBehaviour
 
     private Tilemap walls;
 
+    [SerializeField] private AudioSource explosionSound;
+
     private void Start()
     {
         walls = GameObject.Find("walls").GetComponent<Tilemap>();
@@ -46,11 +48,13 @@ public class BulletBehaviour : MonoBehaviour
         {
             collision.gameObject.GetComponent<Health>().SelfHealth -= Damage;
             Destroy(gameObject);
+            explosionSound.Play();
         }
 
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Solid"))
         {
             Destroy(gameObject);
+            explosionSound.Play();
         }
     }
 }

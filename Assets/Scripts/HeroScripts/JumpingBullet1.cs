@@ -12,6 +12,8 @@ public class JumpingBullet1 : MonoBehaviour
     public string EnemyTag;
     private Tilemap walls;
 
+    [SerializeField] private AudioSource explosionSound;
+
     private Rigidbody2D rb;
 
     public void Start()
@@ -47,6 +49,7 @@ public class JumpingBullet1 : MonoBehaviour
         }
 
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Solid")) Reflect();
+        explosionSound.Play();
     }
 
     private void Reflect()

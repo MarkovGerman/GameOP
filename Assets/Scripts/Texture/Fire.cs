@@ -10,6 +10,7 @@ public class Fire : MonoBehaviour {
 	private Vector2 position;
 	private GameObject player;
 	public float explodeForce = 3f;
+	private bool destriyFlag = false;
 
 	[SerializeField] private AudioSource explosionSound;
 
@@ -26,6 +27,9 @@ public class Fire : MonoBehaviour {
 
 	void Update()
 	{
+		if (destriyFlag)
+			if (!explosionSound.isPlaying)
+				Destroy(gameObject, 0.5f);
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -70,7 +74,7 @@ public class Fire : MonoBehaviour {
 
 			}
 		}
-		Destroy(gameObject, 0.5f);
+		destriyFlag = true;
 
 	}
 

@@ -15,6 +15,8 @@ public class BossAttack : MonoBehaviour
     private float offset = -90;
     private float curtime;
 
+    [SerializeField] private AudioSource explosionSound;
+
     private void Start()
     {
         curtime = 0f;
@@ -62,6 +64,7 @@ public class BossAttack : MonoBehaviour
     {
         curtime += Time.deltaTime;
         TimeBtwShoots = 0.2f;
+        explosionSound.Play();
         if (curtime >= TimeBtwShoots)
         {
             var position = GameObject.Find("Player").transform.position;
