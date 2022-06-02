@@ -9,6 +9,7 @@ public class SeekingEnemy : MonoBehaviour
     public float minDistance;
     public float RandomnessRange = 5f;
 
+    private float StTimer;
     private float waitTimer = 360;
     private Rigidbody2D rb;
     private Vector3 startPos;
@@ -21,12 +22,12 @@ public class SeekingEnemy : MonoBehaviour
     private bool wait;
 
     public float SteeringTime;
-    private float steeringTimer;
+    private float oldX = 0f;
+    private SpriteRenderer render;
 
     private void Start()
     {
-        steeringTimer = 0f;
-        steeringTimer *= Time.deltaTime;
+        render = GetComponent<SpriteRenderer>();
 
         wait = false;
 
@@ -40,27 +41,49 @@ public class SeekingEnemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (TriggerArea.GetComponent<AreaDetector>().PlayerInArea)
+        if (StTimer <= 0f)
         {
-            TryToFindPath();
-            GetComponent<EnemyShooting>().enabled = true;
-        }
+            UpdateFlip();
+            if (TriggerArea.GetComponent<AreaDetector>().PlayerInArea)
+            {
+                TryToFindPath();
+                GetComponent<EnemyShooting>().enabled = true;
+            }
 
+            else
+            {
+                GetComponent<EnemyShooting>().enabled = false;
+                target = (Vector2)startPos + Random.insideUnitCircle * 10f;
+                Wander();
+            }
+        }
         else
         {
-            GetComponent<EnemyShooting>().enabled = false;
-            target = (Vector2)startPos + Random.insideUnitCircle * 10f;
-            Wander();
+            StTimer -= Time.deltaTime;
+            rb.velocity = Vector2.zero;
         }
+    }
+
+    private void UpdateFlip()
+    {
+        if (transform.position.x - oldX > 0)
+            render.flipX = true;
+        else
+            render.flipX = false;
+        oldX = transform.position.x;
+
     }
 
     private void TryToFindPath()
     {
 
         target = GameObject.Find("Player").transform.position;
-
-        AddSteeringVec();
-        AddFleeVecs();
+        if (Vector2.Distance(target, transform.position) > 2f)
+        {
+            AddSteeringVec();
+            AddFleeVecs();
+        }
+        else rb.velocity = Vector2.zero;
     }
 
     private void AddSteeringVec()
@@ -73,9 +96,6 @@ public class SeekingEnemy : MonoBehaviour
         var steeringVec = desirableVelocity - rb.velocity;
 
         rb.velocity = rb.velocity + steeringVec;
-        steeringTimer = 0f;
-        
-        steeringTimer += Time.deltaTime;
     }
 
     private void Wander()
@@ -115,5 +135,10 @@ public class SeekingEnemy : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, CircleRadius);
+    }
+
+    public void StopTimer(int frames)
+    {
+        StTimer = Time.deltaTime * frames;
     }
 }

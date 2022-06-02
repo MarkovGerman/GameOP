@@ -10,6 +10,7 @@ public class MultiGunBehaviour : MonoBehaviour
 
     private float timeBetweenShoots;
     public float startTimeBetweenShoots = 5f;
+    [SerializeField] private AudioSource shootSound;
 
     private void Start()
     {
@@ -26,6 +27,7 @@ public class MultiGunBehaviour : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0))
             {
+                shootSound.Play();
                 Instantiate(bullet, shootPoint.position, transform.rotation);
                 timeBetweenShoots = startTimeBetweenShoots;
             }

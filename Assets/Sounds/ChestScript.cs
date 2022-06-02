@@ -13,12 +13,15 @@ public class ChestScript : MonoBehaviour
     private bool opened = false;
     private int toOpen = 0;
 
+    [SerializeField] private AudioSource openedSound;
+
     private void FixedUpdate()
     {
         if (toOpen == 1 && Input.GetKey(KeyCode.E) && CanBeOpened && !opened)
         {
             opened = true;
             gameObject.GetComponent<SpriteRenderer>().sprite = Opened;
+            openedSound.Play();
             if (Item != null) Instantiate(Item, transform);
         }
 

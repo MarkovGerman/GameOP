@@ -32,7 +32,7 @@ public class BossWalking : MonoBehaviour
 
     void Update()
     {
-        if ((player.transform.position - transform.position).magnitude <= 50)
+        if ((player.transform.position - transform.position).magnitude <= 20)
             StartWalking();
     }
 

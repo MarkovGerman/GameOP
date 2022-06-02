@@ -109,7 +109,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7363524216678760056}
-  m_BodyType: 2
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -135,10 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 5
-  Enemy: Player
-  LifeTime: 40
+  LifeTime: 20
   Distance: 40
   Damage: 1
-  whatIsSolid:
-    serializedVersion: 2
-    m_Bits: 256
+  EnemyTag: Player

@@ -100,7 +100,7 @@ public class MushroomAI : MonoBehaviour
                 var wallTile = wallsTiles.GetTile((Vector3Int)nextTile);
 
                 if (wallTile != null && wallTile.name.Substring(0, 4) == "wall")
-                    continue;
+                   continue;
 
                 track[nextTile] = tile;
                 queue.Enqueue(nextTile);

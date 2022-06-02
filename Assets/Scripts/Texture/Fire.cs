@@ -11,7 +11,7 @@ public class Fire : MonoBehaviour {
 	private GameObject player;
 	public float explodeForce = 3f;
 
-
+	[SerializeField] private AudioSource explosionSound;
 
 	public float DamageRadius;
 	
@@ -42,6 +42,8 @@ public class Fire : MonoBehaviour {
 		animator.SetBool("IsDead", true);
 		//if ((pos - player.transform.position).magnitude <= 5)
 		//	player.GetComponent<Health>().SelfHealth -= 1;
+
+		explosionSound.Play();
 		colliders = Physics2D.OverlapCircleAll(transform.position, DamageRadius);
 		foreach (var collider in colliders)
 		{

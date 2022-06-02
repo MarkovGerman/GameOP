@@ -22,7 +22,7 @@ public class EnemyInteraction : MonoBehaviour
         if (health <= 0)
         {
             sm.Add();
-            animator.SetBool("IsDead", true);
+            //animator.SetBool("IsDead", true);
             Destroy(gameObject);
         }
     }
