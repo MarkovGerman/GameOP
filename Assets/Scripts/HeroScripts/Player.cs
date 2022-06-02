@@ -24,11 +24,9 @@ public class Player : MonoBehaviour
 
     public float Surrounds;
 
-<<<<<<< HEAD
-=======
+
     private float offTime;
 
->>>>>>> 765ac91493ecfb89f3c006b5abadece97a5daf30
     void Start()
     {
         IsOffed = false;
@@ -97,12 +95,10 @@ public class Player : MonoBehaviour
     {
         Gizmos.DrawWireSphere(transform.position, Surrounds);
     }
-<<<<<<< HEAD
-=======
+
     public void OffController()
     {
         IsOffed = true;
         offTime = 20 * Time.deltaTime;
     }
->>>>>>> 765ac91493ecfb89f3c006b5abadece97a5daf30
 }

@@ -17,7 +17,7 @@ public class BulletBehaviour : MonoBehaviour
 
     private void Start()
     {
-        walls = GameObject.Find("walls").GetComponent<Tilemap>();
+        //walls = GameObject.Find("walls").GetComponent<Tilemap>();
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.right * Speed;
     }
@@ -26,10 +26,10 @@ public class BulletBehaviour : MonoBehaviour
     {
         LifeTime -= Time.deltaTime;
 
-        var tile = walls.GetTile(walls.WorldToCell(gameObject.transform.position));
+        //var tile = walls.GetTile(walls.WorldToCell(gameObject.transform.position));
 
-        if (tile != null && tile.name.Substring(0, 4) == "wall")
-            Destroy(gameObject);
+        //if (tile != null && tile.name.Substring(0, 4) == "wall")
+        //    Destroy(gameObject);
 
         if (LifeTime <= 0 || Distance <= 0)
         {

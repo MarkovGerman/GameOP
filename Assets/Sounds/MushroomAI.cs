@@ -5,14 +5,13 @@ using UnityEngine.Tilemaps;
 
 public class MushroomAI : MonoBehaviour
 {
-<<<<<<< HEAD
+
     public float Speed;
 
-=======
+
     public bool IsStepping;
-    public float Speed;
     public AudioSource Stepping;
->>>>>>> 765ac91493ecfb89f3c006b5abadece97a5daf30
+
     public GameObject DetectArea;
     public float PathUpdateTime;
     public float StepUpdateTime;
@@ -27,16 +26,12 @@ public class MushroomAI : MonoBehaviour
     private int stepCounter;
     private Vector3 curTarget;
 
-<<<<<<< HEAD
+
     private bool TurnSprite;
     private bool stepping = false;
     private Rigidbody2D rb;
-    private Vector3 curTarget;
 
-    void Start()
-    {
-        rb = gameObject.GetComponent<Rigidbody2D>();
-=======
+
     private GameObject player;
     private Transform playerPos;
 
@@ -46,7 +41,7 @@ public class MushroomAI : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player");
 
->>>>>>> 765ac91493ecfb89f3c006b5abadece97a5daf30
+
 
         floorTiles = GameObject.Find("floor").GetComponent<Tilemap>();
         wallsTiles = GameObject.Find("walls").GetComponent<Tilemap>();
@@ -65,7 +60,7 @@ public class MushroomAI : MonoBehaviour
         {
             pathTimer += Time.deltaTime;
 
-<<<<<<< HEAD
+
             if (stepping)
             {
                 if (Vector2.Distance(transform.position, curTarget) < 0.1f)
@@ -73,63 +68,62 @@ public class MushroomAI : MonoBehaviour
                     rb.velocity = Vector2.zero;
                     stepping = false;
                 }
-=======
-            playerPos = player.transform;
 
-            if ((path == null || pathTimer >= PathUpdateTime || stepCounter == path.Count))
-            {
-                var playerCoords = floorTiles.WorldToCell(playerPos.position);
-                var mobCoords = floorTiles.WorldToCell(transform.position);
+                playerPos = player.transform;
 
-                path = FindPath(mobCoords, playerCoords);
-                stepCounter = 0;
-                pathTimer = 0f;
->>>>>>> 765ac91493ecfb89f3c006b5abadece97a5daf30
-            }
-
-            else
-            {
-                if (path == null || pathTimer >= PathUpdateTime || stepCounter == path.Count)
+                if ((path == null || pathTimer >= PathUpdateTime || stepCounter == path.Count))
                 {
-                    var player = GameObject.Find("Player");
-                    var playerCoords = floorTiles.WorldToCell(player.transform.position);
+                    var playerCoords = floorTiles.WorldToCell(playerPos.position);
                     var mobCoords = floorTiles.WorldToCell(transform.position);
 
                     path = FindPath(mobCoords, playerCoords);
                     stepCounter = 0;
                     pathTimer = 0f;
+
                 }
 
                 else
                 {
-<<<<<<< HEAD
-                    if (stepTimer >= StepUpdateTime)
+                    if (path == null || pathTimer >= PathUpdateTime || stepCounter == path.Count)
                     {
-                        stepping = true;
-                        curTarget = path[stepCounter] + new Vector3(0.5f, 0.5f);
+                        var player = GameObject.Find("Player");
+                        var playerCoords = floorTiles.WorldToCell(player.transform.position);
+                        var mobCoords = floorTiles.WorldToCell(transform.position);
 
-                        rb.velocity = (curTarget - transform.position).normalized * Speed;
-=======
-                    curTarget = path[stepCounter] + new Vector3(0.5f, 0.5f);
-
-                    transform.position = Vector2.MoveTowards(transform.position, curTarget, 1f);
-
-                    if (!Stepping.isPlaying) Stepping.Play();
->>>>>>> 765ac91493ecfb89f3c006b5abadece97a5daf30
-
-                        stepCounter++;
-                        stepTimer = 0f;
+                        path = FindPath(mobCoords, playerCoords);
+                        stepCounter = 0;
+                        pathTimer = 0f;
                     }
+
+                    else
+                    {
+
+                        if (stepTimer >= StepUpdateTime)
+                        {
+                            stepping = true;
+                            curTarget = path[stepCounter] + new Vector3(0.5f, 0.5f);
+
+                            rb.velocity = (curTarget - transform.position).normalized * Speed;
+
+                            curTarget = path[stepCounter] + new Vector3(0.5f, 0.5f);
+
+                            transform.position = Vector2.MoveTowards(transform.position, curTarget, 1f);
+
+                            if (!Stepping.isPlaying) Stepping.Play();
+
+                            stepCounter++;
+                            stepTimer = 0f;
+                        }
+                        stepTimer += Time.deltaTime;
+                    }
+
                     stepTimer += Time.deltaTime;
+                    if (Vector2.Distance(playerPos.position, transform.position) < 1.5f)
+                        Stepping.Stop();
                 }
-<<<<<<< HEAD
-=======
-                stepTimer += Time.deltaTime;
-                if (Vector2.Distance(playerPos.position, transform.position) < 1.5f)
-                    Stepping.Stop();
->>>>>>> 765ac91493ecfb89f3c006b5abadece97a5daf30
             }
         }
+ 
     }
 
     private List<Vector3Int> FindPath(Vector3Int? start, Vector3Int? end)
