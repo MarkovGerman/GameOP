@@ -85,7 +85,7 @@ public class SeekingEnemy : MonoBehaviour
 
         var steeringVec = desirableVelocity - rb.velocity;
 
-        rb.velocity = rb.velocity + steeringVec + Random.insideUnitCircle / 2f;
+        rb.velocity = rb.velocity + steeringVec;
         steeringTimer = 0f;
         
         steeringTimer += Time.deltaTime;

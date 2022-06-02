@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1587140533175174581}
   - component: {fileID: 1587140533175174583}
   - component: {fileID: 6910575365821348113}
+  - component: {fileID: 1376166308820405314}
   m_Layer: 14
   m_Name: Enemy_Robot (1)
   m_TagString: Enemy
@@ -279,6 +280,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1376166308820405314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3839855660212626710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66e0337e2cff877418863a21b6744edb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  Cheat: 0
+  SelfHealth: 10
 --- !u!1 &7134717104854372768
 GameObject:
   m_ObjectHideFlags: 0

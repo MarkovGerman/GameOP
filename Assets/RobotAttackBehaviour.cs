@@ -15,15 +15,19 @@ public class RobotAttackBehaviour : MonoBehaviour
     public GameObject Bullet;
 
     private float attacksTimer;
+    private float health;
 
     private void Start()
     {
+        health = GetComponent<Health>().SelfHealth;
         TimeBtwAttacks *= Time.deltaTime;
         attacksTimer = 0f;
     }
 
     void Update()
     {
+        health = GetComponent<Health>().SelfHealth;
+        if (health <= 0f) Destroy(gameObject);
         SwordAttack();
         //Shoot();
     }
