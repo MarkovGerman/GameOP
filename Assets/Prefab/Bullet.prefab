@@ -47,14 +47,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 15
+  Enemy: Enemy
   LifeTime: 5
   Distance: 20
   Damage: 1
-  whatIsSolid:
-    serializedVersion: 2
-    m_Bits: 64
-  EnemyTag: 
-  rb: {fileID: 0}
+  EnemyTag: Enemy
 --- !u!212 &7311620993092688290
 SpriteRenderer:
   m_ObjectHideFlags: 0

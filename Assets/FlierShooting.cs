@@ -13,6 +13,7 @@ public class FlierShooting : MonoBehaviour
     private float dir = 1f;
     private FlierWalking walking;
     public Vector2 movementVector;
+    private GameObject player;
     void Start()
     {
         Frequency *= Time.deltaTime;
@@ -20,6 +21,13 @@ public class FlierShooting : MonoBehaviour
     }
 
     void Update()
+    {
+        player = GameObject.Find("Player");
+        if ((transform.position - player.transform.position).magnitude <= 5)
+            Shoot();   
+    }
+
+    void Shoot()
     {
         movementVector = walking.MovementVector;
         var angle = Mathf.Atan2(movementVector.x, -movementVector.y) * Mathf.Rad2Deg;
@@ -38,6 +46,6 @@ public class FlierShooting : MonoBehaviour
             curtime = 0f;
             movementVector *= -1;
         }
-        curtime += Time.deltaTime;   
+        curtime += Time.deltaTime; 
     }
 }

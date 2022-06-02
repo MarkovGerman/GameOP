@@ -26,7 +26,8 @@ public class ShootingWizard : MonoBehaviour
     [System.Obsolete]
     void Update()
     {
-        HardShoot();
+        if ((transform.position- player.transform.position).magnitude <= 5)
+            HardShoot();
     }
 
     void HardShoot()

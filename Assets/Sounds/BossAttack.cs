@@ -26,13 +26,12 @@ public class BossAttack : MonoBehaviour
     [System.Obsolete]
     void Update()
     {
-        if ((player.transform.position - transform.position).magnitude <= 1)
-        {
+        
             Health = GetComponent<Health>().SelfHealth;
             if (Health < 0.2f * startHealth)
                 HardShoot();
             AttackStandart();
-        }
+        
     }
 
     void HardShoot()
