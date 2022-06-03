@@ -24,9 +24,14 @@ public class MushroomAI : MonoBehaviour
 
     private GameObject player;
     private Transform playerPos;
+    private Animator anim;
+    private SpriteRenderer render;
 
     void Start()
     {
+        render = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
+
         IsStepping = true;
 
         player = GameObject.FindGameObjectWithTag("Player");
@@ -45,6 +50,7 @@ public class MushroomAI : MonoBehaviour
 
     void FixedUpdate()
     {
+        transform.position = new Vector3(transform.position.x, transform.position.y, -1);
         if (DetectArea.GetComponent<AreaDetector>().PlayerInArea && IsStepping)
         {
             pathTimer += Time.deltaTime;
@@ -67,16 +73,30 @@ public class MushroomAI : MonoBehaviour
                 {
                     curTarget = path[stepCounter] + new Vector3(0.5f, 0.5f);
 
+                    if (curTarget.x - transform.position.x > 0f)
+                    {
+                        render.flipX = true;
+                    }
+                    else
+                    {
+                        render.flipX = false;
+                    }
+
                     transform.position = Vector2.MoveTowards(transform.position, curTarget, 1f);
 
                     if (!Stepping.isPlaying) Stepping.Play();
 
                     stepCounter++;
                     stepTimer = 0f;
+
+                    anim.SetFloat("Move", 1f);
                 }
                 stepTimer += Time.deltaTime;
                 if (Vector2.Distance(playerPos.position, transform.position) < 1.5f)
+                {
                     Stepping.Stop();
+                    anim.SetFloat("Move", 0f);
+                }
             }
         }
     }
@@ -89,6 +109,7 @@ public class MushroomAI : MonoBehaviour
         var queue = new Queue<Vector3Int?>();
         queue.Enqueue(start);
 
+        bool flag = false;
         while (queue.Count != 0)
         {
             var tile = queue.Dequeue();
@@ -104,7 +125,14 @@ public class MushroomAI : MonoBehaviour
 
                 track[nextTile] = tile;
                 queue.Enqueue(nextTile);
+
+                if (Vector2.Distance((Vector3)tile, (Vector3)end) < 1f)
+                {
+                    flag = true;
+                    break;
+                }
             }
+            if (flag) break;
         }
 
         var pathItem = track[end];

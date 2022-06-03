@@ -28,7 +28,7 @@ public class BossAttack : MonoBehaviour
     [System.Obsolete]
     void Update()
     {
-        if ((player.transform.position - transform.position).magnitude <= 5)
+        if ((player.transform.position - transform.position).magnitude <= 15)
         {
             Health = GetComponent<Health>().SelfHealth;
             if (Health < 0.2f * startHealth)
@@ -63,10 +63,9 @@ public class BossAttack : MonoBehaviour
     void AttackStandart()
     {
         curtime += Time.deltaTime;
-        TimeBtwShoots = 0.2f;
-        explosionSound.Play();
         if (curtime >= TimeBtwShoots)
         {
+            explosionSound.Play();
             var position = GameObject.Find("Player").transform.position;
             Vector3 diff = position - transform.position;
             float angle = Mathf.Atan2(diff.x, -diff.y) * Mathf.Rad2Deg;
